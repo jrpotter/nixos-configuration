@@ -6,12 +6,13 @@ lives within here. As of now, this nixos-configuration expects the following
 structure:
 
 ```bash
-[root@nixos:/etc/nixos]# tree config
+> tree config
 config
 ├── device-uuid
+├── host-id
 ├── jrpotter
 │   └── authorized-keys
 └── README.md
 
-1 directory, 3 files
+1 directory, 4 files
 ```
