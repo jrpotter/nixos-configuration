@@ -45,7 +45,6 @@ in {
     (import "${home-manager}/nixos")
   ];
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     jrpotter = {
       isNormalUser = true;
@@ -59,12 +58,17 @@ in {
   home-manager.users.jrpotter = { pkgs, ... }: {
     home.packages = with pkgs; [
       alacritty
+      bitwarden
+      cabal-install
       chromium
       firefox
       ffmpeg
       fzf
+      ghc
+      gimp
       libreoffice
       mosh
+      mullvad-vpn
       ripgrep
       signal-desktop
       simplescreenrecorder
@@ -72,9 +76,6 @@ in {
       universal-ctags
       vlc
       yarn
-      # Haskell
-      cabal-install
-      ghc
       # Imported
       (import flake-templates).packages.${builtins.currentSystem}.nix-gen
       (import homesync).packages.${builtins.currentSystem}.homesync
@@ -112,4 +113,13 @@ in {
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
+
+  # This corresponds to the configured allowed port.
+  networking.firewall.allowedTCPPorts = [ 54878 55097 ];
+
+  services.mullvad-vpn.enable = true;
+  # This does not # necessarily apply to Mullvad, but in case it might, refer to
+  # the following for why we need this when enabling VPN:
+  # https://github.com/NixOS/nixpkgs/issues/101864#issuecomment-1004358879
+  networking.enableIPv6 = false;
 }
