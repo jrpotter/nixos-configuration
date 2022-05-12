@@ -69,6 +69,7 @@ in {
       libreoffice
       mosh
       mullvad-vpn
+      python3
       ripgrep
       signal-desktop
       simplescreenrecorder
