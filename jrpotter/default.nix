@@ -37,8 +37,8 @@ let
   unstable = pkgs.fetchFromGitHub {
     owner = "NixOS";
     repo = "nixpkgs";
-    rev = "1ec61dd4167f04be8d05c45780818826132eea0d";
-    sha256 = "0aglyrxqkfwm4wxlz642vcgn0m350jv4nhhyq91cxylvs1avps54";
+    rev = "41cc1d5d9584103be4108c1815c350e07c807036";
+    sha256 = "1zwbkijhgb8a5wzsm1dya1a4y79bz6di5h49gcmw6klai84xxisv";
   };
 in {
   imports = [
@@ -66,6 +66,7 @@ in {
       fzf
       ghc
       gimp
+      haskellPackages.hasktags
       libreoffice
       mosh
       mullvad-vpn
@@ -76,6 +77,7 @@ in {
       tmux
       universal-ctags
       vlc
+      whatsapp-for-linux
       yarn
       # Imported
       (import flake-templates).packages.${builtins.currentSystem}.nix-gen
@@ -83,6 +85,7 @@ in {
       (import nix-thunk {}).command
       (import obelisk {}).command
       (import unstable {}).neovim
+      (import unstable {}).zotero
     ];
     programs = {
       bash = {
