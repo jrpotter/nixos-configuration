@@ -1,6 +1,6 @@
-local module = {}
+local M = {}
 
-function module.nvim_dap(options)
+function M.nvim_dap(options)
   local dap = require('dap')
 
   dap.adapters.python = function(callback, config)
@@ -25,7 +25,7 @@ function module.nvim_dap(options)
   })
 end
 
-function module.nvim_lspconfig()
+function M.nvim_lspconfig()
   require('lspconfig').pylsp.setup {
     settings = {
       pylsp = {
@@ -46,4 +46,4 @@ function module.nvim_lspconfig()
   }
 end
 
-return module
+return M

@@ -2,7 +2,7 @@
 {
   programs.neovim = {
     nvim-lspconfig = ''
-      require('lspconfig').lua_ls.setup { }
+      require('init.lua').nvim_lspconfig()
     '';
 
     extraPackages = [ pkgs.lua-language-server ];

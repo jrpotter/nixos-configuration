@@ -23,4 +23,8 @@ in
 
     extraPackages = [ venv ];
   };
+
+  xdg.configFile."nvim/after/ftplugin/python.lua".text = ''
+    require('init.dap').buffer_map()
+  '';
 }

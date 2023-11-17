@@ -1,7 +1,18 @@
 { config, pkgs, lib, ... }:
 let
+  pluginGit = rev: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = builtins.substring 0 7 rev;
+    src = builtins.fetchGit {
+      url = "https://github.com/${repo}.git";
+      rev = rev;
+    };
+  };
+
   nvim-dap = {
-    plugin = pkgs.vimPlugins.nvim-dap;
+    plugin = pluginGit
+      "e154fdb6d70b3765d71f296e718b29d8b7026a63"
+      "mfussenegger/nvim-dap";
     config = config.programs.neovim.nvim-dap;
   };
 
@@ -66,10 +77,11 @@ in
 
   config = {
     programs.neovim = {
-      plugins = map (p: {
-        inherit (p) plugin;
-        config = "lua << EOF\n${p.config}\nEOF";
-      }) [
+      plugins = map (p:
+        if builtins.hasAttr "config" p then {
+          inherit (p) plugin;
+          config = "lua << EOF\n${p.config}\nEOF";
+        } else p) [
         nvim-dap
         nvim-lspconfig
         nvim-treesitter
@@ -95,6 +107,8 @@ in
         '')
       # Extra Lua configuration to be appended to `init.lua`.
       (lib.mkAfter ''
+        vim.g.mapleader = ' '
+        vim.g.maplocalleader = '\\'
         vim.o.colorcolumn = '80,100'
         vim.o.expandtab = true  -- Spaces instead of tabs.
         vim.o.shiftwidth = 2    -- # of spaces to use for each (auto)indent.
