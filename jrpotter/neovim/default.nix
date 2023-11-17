@@ -1,33 +1,13 @@
-args @ { pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
-  conf = {
-    lua = import ./lua.nix args;
-    nix = import ./nix.nix args;
-    python = import ./python.nix args;
-  };
-
   nvim-dap = {
     plugin = pkgs.vimPlugins.nvim-dap;
-    config = ''
-      lua << EOF
-      ${builtins.concatStringsSep "\n" (builtins.map (m: "do\n${m}\nend") [
-        conf.python.nvim-dap
-      ])}
-      EOF
-    '';
+    config = config.programs.neovim.nvim-dap;
   };
 
   nvim-lspconfig = {
     plugin = pkgs.vimPlugins.nvim-lspconfig;
-    config = ''
-      lua << EOF
-      ${builtins.concatStringsSep "\n" (builtins.map (m: "do\n${m}\nend") [
-        conf.lua.nvim-lspconfig
-        conf.nix.nvim-lspconfig
-        conf.python.nvim-lspconfig
-      ])}
-      EOF
-    '';
+    config = config.programs.neovim.nvim-lspconfig;
   };
 
   nvim-treesitter = {
@@ -39,7 +19,6 @@ let
       ]
     ));
     config = ''
-      lua << EOF
       require('nvim-treesitter.configs').setup {
         auto_install = false,
         highlight = { enable = true },
@@ -53,29 +32,74 @@ let
           },
         },
       }
-      EOF
     '';
   };
 in
 {
-  programs.neovim = {
-    extraLuaConfig = ''
-      vim.o.colorcolumn = '80,100'
-      vim.o.expandtab = true  -- Spaces instead of tabs.
-      vim.o.shiftwidth = 2    -- # of spaces to use for each (auto)indent.
-      vim.o.tabstop = 2       -- # of spaces a <Tab> in the file counts for.
-    '';
-    extraPackages = (
-      conf.lua.extraPackages ++
-      conf.nix.extraPackages ++
-      conf.python.extraPackages
-    );
-    plugins = [
-      nvim-dap
-      nvim-lspconfig
-      nvim-treesitter
+  options.programs.neovim = {
+    nvim-dap = lib.mkOption {
+      type = lib.types.lines;
+      example = ''
+        require('...').nvim_dap()
+      '';
+      description = lib.mdDoc ''
+        Language-specific configurations for the `nvim-dap` plugin.
+      '';
+    };
+
+    nvim-lspconfig = lib.mkOption {
+      type = lib.types.lines;
+      example = ''
+        require('...').nvim_lspconfig()
+      '';
+      description = lib.mdDoc ''
+        Language-specific configurations for the `nvim-lspconfig` plugin.
+      '';
+    };
+  };
+
+  imports = [
+    ./lang/lua.nix
+    ./lang/nix.nix
+    ./lang/python.nix
+  ];
+
+  config = {
+    programs.neovim = {
+      plugins = map (p: {
+        inherit (p) plugin;
+        config = "lua << EOF\n${p.config}\nEOF";
+      }) [
+        nvim-dap
+        nvim-lspconfig
+        nvim-treesitter
+      ];
+      viAlias = true;
+      vimAlias = true;
+    };
+
+    xdg.configFile."nvim/init.lua".text = lib.mkMerge [
+      # Extra Lua configuration to be prepended to `init.lua`. Extend the Lua
+      # loader to search for our /nix/store/.../?.lua files.
+      (let
+        lua = pkgs.stdenv.mkDerivation {
+          name = "lua";
+          src = ./lua;
+          installPhase = ''
+            mkdir -p $out/
+            cp -r ./* $out/
+          '';
+        };
+        in lib.mkBefore ''
+          package.path = '${lua}/?.lua;' .. package.path
+        '')
+      # Extra Lua configuration to be appended to `init.lua`.
+      (lib.mkAfter ''
+        vim.o.colorcolumn = '80,100'
+        vim.o.expandtab = true  -- Spaces instead of tabs.
+        vim.o.shiftwidth = 2    -- # of spaces to use for each (auto)indent.
+        vim.o.tabstop = 2       -- # of spaces a <Tab> in the file counts for.
+      '')
     ];
-    viAlias = true;
-    vimAlias = true;
   };
 }
