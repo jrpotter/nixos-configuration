@@ -41,6 +41,7 @@
           set colorcolumn=80,100
           set expandtab     " Spaces instead of tabs.
           set list          " Show hidden characters.
+          set listchars=tab:>\ ,trail:-,nbsp:+
           set shiftwidth=2  " # of spaces to use for each (auto)indent.
           set tabstop=2     " # of spaces a <Tab> in the file counts for.
         '';
@@ -91,9 +92,17 @@
   users.users.jrpotter = {
     isNormalUser = true;
     extraGroups = [
+      "docker"
       "networkmanager"
       "wheel"  # Enable `sudo` for the user.
     ];
+  };
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    # Sets the `DOCKER_HOST` variable to the rootless Docker instance for normal
+    # users by default.
+    setSocketVariable = true;
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
