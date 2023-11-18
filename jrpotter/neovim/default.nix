@@ -111,6 +111,7 @@ in
         vim.g.maplocalleader = '\\'
         vim.o.colorcolumn = '80,100'
         vim.o.expandtab = true  -- Spaces instead of tabs.
+        vim.o.list = true       -- Show hidden characters.
         vim.o.shiftwidth = 2    -- # of spaces to use for each (auto)indent.
         vim.o.tabstop = 2       -- # of spaces a <Tab> in the file counts for.
       '')

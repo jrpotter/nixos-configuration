@@ -28,8 +28,8 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             users.jrpotter = import ./jrpotter;
-	        };
-	      }
+          };
+        }
       ];
     };
   };

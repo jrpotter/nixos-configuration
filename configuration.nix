@@ -46,6 +46,7 @@
       customRC = ''
       set colorcolumn=80,100
       set expandtab     " Spaces instead of tabs.
+      set list          " Show hidden characters.
       set shiftwidth=2  " # of spaces to use for each (auto)indent.
       set tabstop=2     " # of spaces a <Tab> in the file counts for.
       '';
