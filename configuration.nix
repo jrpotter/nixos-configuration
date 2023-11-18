@@ -51,6 +51,11 @@
     };
   };
 
+  # After 23.05, this option is called `fonts.packages`.
+  fonts.fonts = with pkgs; [
+    iosevka
+  ];
+
   hardware.bluetooth.enable = true;
 
   networking.hostName = "nixos";
