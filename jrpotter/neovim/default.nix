@@ -77,6 +77,7 @@ in
 
   config = {
     programs.neovim = {
+      defaultEditor = true;
       plugins = map (p:
         if builtins.hasAttr "config" p then {
           inherit (p) plugin;

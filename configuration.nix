@@ -32,28 +32,26 @@
     systemPackages = with pkgs; [
       gcc
       git
+      ((vim_configurable.override {}).customize {
+        name = "vim";
+        vimrcConfig.customRC = ''
+          set nocompatible
+          syntax on
+
+          set colorcolumn=80,100
+          set expandtab     " Spaces instead of tabs.
+          set list          " Show hidden characters.
+          set shiftwidth=2  " # of spaces to use for each (auto)indent.
+          set tabstop=2     " # of spaces a <Tab> in the file counts for.
+        '';
+      })
     ];
     variables = {
-      EDITOR = "nvim";
+      EDITOR = "vim";
     };
   };
 
   hardware.bluetooth.enable = true;
-
-  programs.neovim = {
-    enable = true;
-    configure = {
-      customRC = ''
-      set colorcolumn=80,100
-      set expandtab     " Spaces instead of tabs.
-      set list          " Show hidden characters.
-      set shiftwidth=2  " # of spaces to use for each (auto)indent.
-      set tabstop=2     " # of spaces a <Tab> in the file counts for.
-      '';
-    };
-    viAlias = true;
-    vimAlias = true;
-  };
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;

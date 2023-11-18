@@ -9,7 +9,7 @@
   home = {
     username = "jrpotter";
     homeDirectory = "/home/jrpotter";
-  
+
     packages = with pkgs; [
       anki-bin
       bitwarden

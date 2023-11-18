@@ -53,6 +53,11 @@ return {
       action = wezterm.action.ActivateTabRelative(-1),
     },
     {
+      key = 'c',
+      mods = 'LEADER',
+      action = wezterm.action.SpawnTab 'CurrentPaneDomain',
+    },
+    {
       -- Disallow hiding the terminal from the keyboard.
       key = 'm',
       mods = 'CMD',
