@@ -3,6 +3,7 @@
   imports = [
     ./git.nix
     ./neovim
+    ./wezterm
   ];
 
   home = {
