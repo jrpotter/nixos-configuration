@@ -9,6 +9,13 @@ let
     };
   };
 
+  nvim-cmp = {
+    plugin = pkgs.vimPlugins.nvim-cmp;
+    config = ''
+      require('init.cmp').setup()
+    '';
+  };
+
   nvim-dap = {
     plugin = pluginGit
       "e154fdb6d70b3765d71f296e718b29d8b7026a63"
@@ -30,19 +37,7 @@ let
       ]
     ));
     config = ''
-      require('nvim-treesitter.configs').setup {
-        auto_install = false,
-        highlight = { enable = true },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<Tab>',
-            node_incremental = '<Tab>',
-            node_decremental = '<S-Tab>',
-            scope_incremental = false,
-          },
-        },
-      }
+      require('init.treesitter').setup()
     '';
   };
 in
@@ -83,9 +78,12 @@ in
           inherit (p) plugin;
           config = "lua << EOF\n${p.config}\nEOF";
         } else p) [
+        nvim-cmp
         nvim-dap
         nvim-lspconfig
         nvim-treesitter
+        pkgs.vimPlugins.cmp-buffer
+        pkgs.vimPlugins.cmp-nvim-lsp
       ];
       viAlias = true;
       vimAlias = true;
