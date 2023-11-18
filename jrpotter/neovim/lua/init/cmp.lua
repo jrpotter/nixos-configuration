@@ -2,9 +2,15 @@ local M = {}
 
 local cmp = require('cmp')
 local cmp_buffer = require('cmp_buffer')
+local luasnip = require("luasnip")
 
 function M.setup()
   cmp.setup {
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body)
+      end,
+    },
     sources = {
       {
         name = 'nvim_lsp',
@@ -46,7 +52,21 @@ function M.setup()
       end, { 'i', 's' }),
 
       ['<tab>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then cmp.confirm() else fallback() end
+        if cmp.get_active_entry() then
+          cmp.confirm()
+        elseif luasnip.expand_or_locally_jumpable() then
+          luasnip.expand_or_jump()
+        else
+          fallback()
+        end
+      end, { 'i', 's' }),
+
+      ['<s-tab>'] = cmp.mapping(function(fallback)
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
       end, { 'i', 's' }),
     },
   }

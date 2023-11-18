@@ -84,6 +84,8 @@ in
         nvim-treesitter
         pkgs.vimPlugins.cmp-buffer
         pkgs.vimPlugins.cmp-nvim-lsp
+        pkgs.vimPlugins.cmp_luasnip
+        pkgs.vimPlugins.luasnip
       ];
       viAlias = true;
       vimAlias = true;
