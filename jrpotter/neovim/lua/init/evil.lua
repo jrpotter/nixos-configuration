@@ -1,9 +1,7 @@
--- Original configuration:
--- Author: shadmansaleh
--- Credit: glepnir
+-- Original configuration: shadmansaleh/glepnir.
+-- Modifications include LSP and DAP information.
 local lualine = require('lualine')
 
--- Color table for highlights
 local colors = {
   bg       = '#202328',
   fg       = '#bbc2cf',
@@ -143,14 +141,13 @@ ins_left {
   },
 }
 
--- Insert mid section. You can make any number of sections in neovim :)
+-- Insert mid section. You can make any number of sections in neovim.
 ins_left {
   function()
     return '%='
   end,
 }
 
--- Add first active LSP client.
 local function get_active_lsp()
   local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
   local clients = vim.lsp.get_active_clients()
@@ -195,10 +192,9 @@ ins_left {
   end,
 }
 
--- Add components to right sections
 ins_right {
-  'o:encoding', -- option component same as &encoding in viml
-  fmt = string.upper, -- I'm not sure why it's upper case either ;)
+  'o:encoding', -- same as &encoding in VimL.
+  fmt = string.upper,
   cond = conditions.hide_in_width,
   color = { fg = colors.green, gui = 'bold' },
 }
