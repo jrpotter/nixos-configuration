@@ -9,6 +9,13 @@ let
     };
   };
 
+  lualine-nvim = {
+    plugin = pkgs.vimPlugins.lualine-nvim;
+    config = ''
+      require('init.evil')
+    '';
+  };
+
   nvim-cmp = {
     plugin = pkgs.vimPlugins.nvim-cmp;
     config = ''
@@ -78,6 +85,7 @@ in
           inherit (p) plugin;
           config = "lua << EOF\n${p.config}\nEOF";
         } else p) [
+        lualine-nvim
         nvim-cmp
         nvim-dap
         nvim-lspconfig
@@ -86,6 +94,7 @@ in
         pkgs.vimPlugins.cmp-nvim-lsp
         pkgs.vimPlugins.cmp_luasnip
         pkgs.vimPlugins.luasnip
+        pkgs.vimPlugins.nvim-web-devicons
       ];
       viAlias = true;
       vimAlias = true;
