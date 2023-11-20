@@ -65,6 +65,7 @@ in
   };
 
   imports = [
+    ./lang/bash.nix
     ./lang/lean.nix
     ./lang/lua.nix
     ./lang/nix.nix
