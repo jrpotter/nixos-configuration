@@ -1,7 +1,7 @@
 local M = {}
 
 function M.nvim_lspconfig()
-  require('lspconfig').lua_ls.setup {
+  require('init.lsp').setup(require('lspconfig').lua_ls) {
     -- Provide completions, analysis, and location handling for plugins on the
     -- vim runtime path.
     -- https://github.com/neovim/nvim-lspconfig/blob/48347089666d5b77d054088aa72e4e0b58026e6e/doc/server_configurations.md#lua_ls

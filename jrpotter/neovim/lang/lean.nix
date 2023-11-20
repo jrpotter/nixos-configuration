@@ -8,7 +8,7 @@ let
       "Julian/lean.nvim";
     config = ''
       lua << EOF
-      require('lean').setup {
+      require('init.lsp').setup(require('lean')) {
         abbreviations = { builtin = true },
         mappings = true,
       }

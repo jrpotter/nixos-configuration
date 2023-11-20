@@ -26,7 +26,7 @@ function M.nvim_dap(options)
 end
 
 function M.nvim_lspconfig()
-  require('lspconfig').pylsp.setup {
+  require('init.lsp').setup(require('lspconfig').pylsp) {
     settings = {
       pylsp = {
         -- `flake8` currently fails in some cases. Prefer the default set of
