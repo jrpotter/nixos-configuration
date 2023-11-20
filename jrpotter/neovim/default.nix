@@ -32,6 +32,7 @@ let
     plugin = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
       ps: with ps; [
         bash
+        elixir
         lua
         nix
         python
@@ -68,6 +69,7 @@ in
 
   imports = [
     ./lang/bash.nix
+    ./lang/elixir.nix
     ./lang/lean.nix
     ./lang/lua.nix
     ./lang/nix.nix
