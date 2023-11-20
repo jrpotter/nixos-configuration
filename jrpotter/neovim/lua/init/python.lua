@@ -1,13 +1,13 @@
 local M = {}
 
-function M.nvim_dap(options)
+function M.nvim_dap()
   local dap = require('dap')
 
   dap.adapters.python = function(callback, config)
     callback({
       name = 'debugpy',
       type = 'executable',
-      command = options.command,
+      command = 'python3',
       args = { '-m', 'debugpy.adapter' },
       options = {
         source_filetype = 'python',

@@ -18,6 +18,7 @@
       gnumake
       mullvad-vpn
       python3
+      unzip
       wezterm
       zotero
     ];

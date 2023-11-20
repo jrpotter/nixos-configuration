@@ -12,9 +12,7 @@ in
 {
   programs.neovim = {
     nvim-dap = ''
-      require('init.python').nvim_dap({
-        command = '${venv}/bin/python3.10',
-      })
+      require('init.python').nvim_dap()
     '';
 
     nvim-lspconfig = ''
