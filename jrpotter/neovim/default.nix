@@ -31,9 +31,11 @@ let
   nvim-treesitter = {
     plugin = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
       ps: with ps; [
+        bash
         lua
         nix
         python
+        typescript
       ]
     ));
     config = ''
@@ -70,6 +72,7 @@ in
     ./lang/lua.nix
     ./lang/nix.nix
     ./lang/python.nix
+    ./lang/typescript.nix
   ];
 
   config = {
