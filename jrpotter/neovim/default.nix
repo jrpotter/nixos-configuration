@@ -1,13 +1,6 @@
-{ config, pkgs, lib, ... }:
+args @ { config, pkgs, lib, ... }:
 let
-  pluginGit = rev: repo: pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "${lib.strings.sanitizeDerivationName repo}";
-    version = builtins.substring 0 7 rev;
-    src = builtins.fetchGit {
-      url = "https://github.com/${repo}.git";
-      rev = rev;
-    };
-  };
+  utils = import ./utils.nix args;
 
   lualine-nvim = {
     plugin = pkgs.vimPlugins.lualine-nvim;
@@ -24,7 +17,7 @@ let
   };
 
   nvim-dap = {
-    plugin = pluginGit
+    plugin = utils.pluginGit
       "e154fdb6d70b3765d71f296e718b29d8b7026a63"
       "mfussenegger/nvim-dap";
     config = config.programs.neovim.nvim-dap;
@@ -72,6 +65,7 @@ in
   };
 
   imports = [
+    ./lang/lean.nix
     ./lang/lua.nix
     ./lang/nix.nix
     ./lang/python.nix

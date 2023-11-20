@@ -13,7 +13,9 @@
     packages = with pkgs; [
       anki-bin
       bitwarden
+      elan
       firefox
+      gnumake
       mullvad-vpn
       python3
       wezterm
