@@ -2,14 +2,16 @@
 {
   home.packages = with pkgs; [
     clang-tools
-    vscode-extensions.vadimcn.vscode-lldb
+    (writeShellScriptBin "codelldb" ''
+      #!/usr/bin/env bash
+
+      exec ${vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb "$@"
+    '')
   ];
 
   programs.neovim = {
     nvim-dap = ''
-      require('init.c').nvim_dap({
-        command = '${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb'
-      })
+      require('init.c').nvim_dap()
     '';
 
     nvim-lspconfig = ''

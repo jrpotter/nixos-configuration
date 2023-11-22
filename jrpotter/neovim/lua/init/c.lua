@@ -1,6 +1,6 @@
 local M = {}
 
-function M.nvim_dap(options)
+function M.nvim_dap()
   local dap = require('dap')
   local key = 'codelldb'
 
@@ -8,7 +8,7 @@ function M.nvim_dap(options)
     type = 'server',
     port = '${port}',
     executable = {
-      command = options.command,
+      command = 'codelldb',
       args = {'--port', '${port}'},
     },
   }
