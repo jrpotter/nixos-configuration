@@ -25,7 +25,6 @@
       packages = with pkgs; [
         anki-bin
         bitwarden
-        clang
         elan
         firefox
         gnumake
