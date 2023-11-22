@@ -1,12 +1,14 @@
-{ ... }:
+{ pkgs, ... }:
 {
-  home.extraPythonPackages = [
-    "debugpy"
-    "mccabe"
-    "pycodestyle"
-    "pyflakes"
-    "python-lsp-server"
-    "python-lsp-black"
+  home.packages = with pkgs; [
+    (python3.withPackages (ps: with ps; [
+      debugpy
+      mccabe
+      pycodestyle
+      pyflakes
+      python-lsp-server
+      python-lsp-black
+    ]))
   ];
 
   programs.neovim = {

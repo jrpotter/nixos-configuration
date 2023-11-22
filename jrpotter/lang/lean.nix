@@ -1,9 +1,9 @@
 args @ { pkgs, ... }:
 let
-  utils = import ../utils.nix args;
+  neovimUtils = import ../neovim/utils.nix args;
 
   lean-nvim = {
-    plugin = utils.pluginGit
+    plugin = neovimUtils.pluginGit
       "47ff75ce2fcc319fe7d8e031bc42a75473919b93"
       "Julian/lean.nvim";
     config = ''
@@ -17,6 +17,10 @@ let
   };
 in
 {
+  home.packages = with pkgs; [
+    elan
+  ];
+
   programs.neovim = {
     plugins = [
       lean-nvim

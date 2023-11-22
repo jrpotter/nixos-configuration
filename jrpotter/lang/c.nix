@@ -1,13 +1,17 @@
 { pkgs, ... }:
+let
+  codelldb = pkgs.writeShellScriptBin "codelldb" ''
+    #!/usr/bin/env bash
+    exec ${pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb "$@"
+  '';
+in
 {
   home.packages = with pkgs; [
     bear
     clang
     clang-tools
-    (writeShellScriptBin "codelldb" ''
-      #!/usr/bin/env bash
-      exec ${vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb "$@"
-    '')
+    codelldb
+    gnumake
   ];
 
   programs.neovim = {
