@@ -2,23 +2,21 @@ local M = {}
 
 function M.nvim_dap()
   local dap = require('dap')
+  local key = 'debugpy'
 
-  dap.adapters.python = function(callback, config)
-    callback({
-      name = 'debugpy',
-      type = 'executable',
-      command = 'python3',
-      args = { '-m', 'debugpy.adapter' },
-      options = {
-        source_filetype = 'python',
-      },
-    })
-  end
+  dap.adapters[key] = {
+    type = 'executable',
+    command = 'python3',
+    args = { '-m', 'debugpy.adapter' },
+    options = {
+      source_filetype = 'python',
+    },
+  }
 
   dap.configurations.python = dap.configurations.python or {}
   table.insert(dap.configurations.python, {
-    name = 'Launch',
-    type = 'python',
+    name = 'Launch File',
+    type = key,
     request = 'launch',
     program = '${file}',
     cwd = '${workspaceFolder}',

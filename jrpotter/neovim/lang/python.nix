@@ -1,15 +1,14 @@
-{ pkgs, ... }:
-let
-  venv = pkgs.python3.withPackages (ps: with ps; [
-    debugpy
-    mccabe
-    pycodestyle
-    pyflakes
-    python-lsp-server
-    python-lsp-black
-  ]);
-in
+{ ... }:
 {
+  home.extraPythonPackages = [
+    "debugpy"
+    "mccabe"
+    "pycodestyle"
+    "pyflakes"
+    "python-lsp-server"
+    "python-lsp-black"
+  ];
+
   programs.neovim = {
     nvim-dap = ''
       require('init.python').nvim_dap()
@@ -18,8 +17,6 @@ in
     nvim-lspconfig = ''
       require('init.python').nvim_lspconfig()
     '';
-
-    extraPackages = [ venv ];
   };
 
   xdg.configFile."nvim/after/ftplugin/python.lua".text = ''

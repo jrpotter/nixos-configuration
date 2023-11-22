@@ -32,6 +32,7 @@ let
     plugin = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
       ps: with ps; [
         bash
+        c
         elixir
         lua
         nix
@@ -67,8 +68,19 @@ in
     };
   };
 
+  # Notice that within our imports we use `home.packages` instead of
+  # `extraPackages`. The latter is preferable but comes with `$PATH`-related
+  # problems.
+  #
+  # Specifically, Home Manager appends paths specifed in `extraPackages` to the
+  # end of `$PATH` meaning any already defined instance of some package will be
+  # used instead. Prepending is not an option either since that would break
+  # environments like those produced by `direnv` or `nix-shell`.
+  #
+  # https://github.com/nix-community/home-manager/pull/1756
   imports = [
     ./lang/bash.nix
+    ./lang/c.nix
     ./lang/elixir.nix
     ./lang/lean.nix
     ./lang/lua.nix
