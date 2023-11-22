@@ -7,6 +7,7 @@
     ./lang/elixir.nix
     ./lang/lean.nix
     ./lang/lua.nix
+    ./lang/markdown.nix
     ./lang/nix.nix
     ./lang/python.nix
     ./lang/typescript.nix

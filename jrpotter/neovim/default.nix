@@ -35,6 +35,7 @@ let
         c
         elixir
         lua
+        markdown
         nix
         python
         typescript
