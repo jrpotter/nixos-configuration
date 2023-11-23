@@ -107,6 +107,10 @@ function M.buffer_map()
       vim.cmd(any_sidebar_open() and 'leftabove split' or 'vertical topleft split')
       sidebar.open()
       vim.fn.win_gotoid(win_id)
+      -- Update state of windows.
+      vim.api.nvim_win_set_option(sidebar.win, 'colorcolumn', '')
+      vim.api.nvim_win_set_option(sidebar.win, 'list', false)
+      vim.api.nvim_win_set_option(sidebar.win, 'wrap', false)
     end
   end
 

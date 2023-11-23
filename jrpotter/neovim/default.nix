@@ -20,7 +20,10 @@ let
     plugin = utils.pluginGit
       "e154fdb6d70b3765d71f296e718b29d8b7026a63"
       "mfussenegger/nvim-dap";
-    config = config.programs.neovim.nvim-dap;
+    config = ''
+      require('dap').defaults.fallback.terminal_win_cmd = 'below 10split new'
+      ${config.programs.neovim.nvim-dap};
+    '';
   };
 
   nvim-lspconfig = {
