@@ -1,10 +1,14 @@
 local M = {}
 
 local function on_attach(client, bufnr)
-  local opts = { buffer = bufnr }
-  vim.keymap.set('n', 'gq', function()
-    vim.lsp.buf.format { async = true }
-  end, opts)
+  local function set_nnoremap(key, func)
+    vim.keymap.set('n', key, func, { buffer = bufnr })
+  end
+  set_nnoremap('[d', vim.diagnostic.goto_prev)
+  set_nnoremap(']d', vim.diagnostic.goto_next)
+  set_nnoremap('g?', vim.diagnostic.open_float)
+  set_nnoremap('gq', function() vim.lsp.buf.format { async = true } end)
+  set_nnoremap('gr', vim.lsp.buf.rename)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
