@@ -32,17 +32,22 @@ function M.setup()
       lsp_definitions = { theme = 'cursor' },
       lsp_implementations = { theme = 'cursor' },
       lsp_type_definitions = { theme = 'cursor' },
+      lsp_workspace_symbols = { theme = 'ivy' },
     },
   }
 
+  -- General
   set_telescope_map(';', 'resume')
   set_telescope_map('b', 'buffers')
   set_telescope_map('f', 'find_files')
+  set_telescope_map('g', 'live_grep')
 
-  set_telescope_map('s', 'live_grep')
-  set_telescope_map('d', 'lsp_type_definitions')
+  -- LSP
+  set_telescope_map('?', 'diagnostics')
   set_telescope_map(']', 'lsp_definitions')
   set_telescope_map('i', 'lsp_implementations')
+  set_telescope_map('s', 'lsp_workspace_symbols')
+  set_telescope_map('t', 'lsp_type_definitions')
 
   vim.api.nvim_create_autocmd('User', {
     pattern = 'TelescopePreviewerLoaded',

@@ -149,14 +149,6 @@ function M.buffer_map()
   set_nnoremap('wt', function()
     toggle_sidebar(sidebars.threads)
   end)
-  set_nnoremap('wx', function()
-    for _, sb in pairs(sidebars) do
-      if sidebar_is_open(sb) then
-        toggle_sidebar(sb)
-      end
-      dap.repl.close()
-    end
-  end)
 end
 
 return M

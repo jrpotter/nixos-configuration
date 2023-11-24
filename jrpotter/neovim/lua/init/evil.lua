@@ -168,7 +168,7 @@ ins_left {
     local lsp_name = get_active_lsp().name
     local has_dap, dap = pcall(require, 'dap')
     if has_dap and dap.status() ~= "" then
-      return string.format("%s:%s", lsp_name, dap.session().adapter.name)
+      return string.format("%s", lsp_name)
     else
       return lsp_name
     end
