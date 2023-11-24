@@ -31,6 +31,13 @@ let
     config = config.programs.neovim.nvim-lspconfig;
   };
 
+  nvim-telescope = {
+    plugin = pkgs.vimPlugins.telescope-nvim;
+    config = ''
+      require('init.telescope').setup()
+    '';
+  };
+
   nvim-treesitter = {
     plugin = (pkgs.vimPlugins.nvim-treesitter.withPlugins (
       ps: with ps; [
@@ -73,6 +80,10 @@ in
   };
 
   config = {
+    home.packages = with pkgs; [
+      ripgrep
+    ];
+
     programs.neovim = {
       defaultEditor = true;
       plugins = map (p:
@@ -84,6 +95,7 @@ in
         nvim-cmp
         nvim-dap
         nvim-lspconfig
+        nvim-telescope
         nvim-treesitter
         pkgs.vimPlugins.cmp-buffer
         pkgs.vimPlugins.cmp-nvim-lsp
