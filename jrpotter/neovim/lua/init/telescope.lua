@@ -15,6 +15,16 @@ end
 
 function M.setup()
   require('telescope').setup {
+    defaults = {
+      mappings = {
+        i = {
+          ['<c-s>'] = 'select_horizontal',
+          ['<c-t>'] = 'select_tab',
+          ['<c-v>'] = 'select_vertical',
+          ['<esc>'] = 'close',
+        },
+      },
+    },
     pickers = {
       buffers = { theme = 'ivy' },
       find_files = { theme = 'ivy' },
