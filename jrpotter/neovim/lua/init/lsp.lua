@@ -6,6 +6,7 @@ local function on_attach(client, bufnr)
   end
   set_nnoremap('[d', vim.diagnostic.goto_prev)
   set_nnoremap(']d', vim.diagnostic.goto_next)
+  set_nnoremap('g"', vim.lsp.buf.code_action)
   set_nnoremap('g?', vim.diagnostic.open_float)
   set_nnoremap('gq', function() vim.lsp.buf.format { async = true } end)
   set_nnoremap('gr', vim.lsp.buf.rename)
