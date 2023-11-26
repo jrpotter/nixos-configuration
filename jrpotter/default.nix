@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, bootstrap, ... }:
 {
   imports = [
     ./git.nix
@@ -21,7 +21,9 @@
     packages = with pkgs; [
       anki-bin
       bitwarden
+      bootstrap
       firefox
+      gimp
       mullvad-vpn
       unzip
       wezterm
