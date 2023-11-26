@@ -20,6 +20,12 @@ in
 
     nvim-lspconfig = ''
       require('init.c').nvim_lspconfig()
+
+      vim.filetype.add({
+        pattern = {
+          ['.*%.h'] = 'c',
+        },
+      })
     '';
   };
 
