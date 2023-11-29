@@ -5,7 +5,7 @@ local dap_ui = require('dap.ui')
 local dap_ui_widgets = require('dap.ui.widgets')
 
 local function query_launch()
-  local command = vim.fn.input('Executable> ', vim.fn.getcwd() .. '/', 'file')
+  local command = vim.fn.input('Launch> ', vim.fn.getcwd() .. '/', 'file')
   vim.api.nvim_echo({ { '', 'None' } }, false, {})
 
   local parts = vim.split(command, '%s+', { trimempty = true })
