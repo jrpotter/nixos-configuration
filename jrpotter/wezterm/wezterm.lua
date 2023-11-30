@@ -2,7 +2,7 @@ local wezterm = require('wezterm')
 
 return {
   check_for_updates = false,
-  color_scheme = 'Chalk (Gogh)',
+  color_scheme = 'nordfox',
   font = wezterm.font 'Iosevka',
   keys = {
     {

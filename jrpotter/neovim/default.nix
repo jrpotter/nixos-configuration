@@ -2,6 +2,15 @@ args @ { config, pkgs, lib, ... }:
 let
   utils = import ./utils.nix args;
 
+  nightfox = {
+    plugin = utils.pluginGit
+      "eb82712f86319272f4b7b9dbb4ec6df650e6987f"
+      "EdenEast/nightfox.nvim";
+    config = ''
+      vim.cmd('colorscheme nordfox')
+    '';
+  };
+
   nvim-cmp = {
     plugin = pkgs.vimPlugins.nvim-cmp;
     config = ''
@@ -84,6 +93,7 @@ in
           inherit (p) plugin;
           config = "lua << EOF\n${p.config}\nEOF";
         } else p) [
+        nightfox
         nvim-cmp
         nvim-dap
         nvim-lspconfig
@@ -98,33 +108,27 @@ in
       vimAlias = true;
     };
 
-    xdg.configFile."nvim/init.lua".text = lib.mkMerge [
-      # Extra Lua configuration to be prepended to `init.lua`. Extend the Lua
-      # loader to search for our /nix/store/.../?.lua files.
-      (let
-        lua = pkgs.stdenv.mkDerivation {
-          name = "lua";
-          src = ./lua;
-          installPhase = ''
-            mkdir -p $out/
-            cp -r ./* $out/
-          '';
-        };
-        in lib.mkBefore ''
-          package.path = '${lua}/?.lua;' .. package.path
-        '')
-
-      # Extra Lua configuration to be appended to `init.lua`.
-      (lib.mkAfter ''
-        vim.g.mapleader = ' '
-        vim.g.maplocalleader = '\\'
-        vim.o.colorcolumn = '80,100'
-        vim.o.equalalways = false  -- Disable auto window resize.
-        vim.o.expandtab = true     -- Spaces instead of tabs.
-        vim.o.list = true          -- Show hidden characters.
-        vim.o.shiftwidth = 2       -- # of spaces to use for each (auto)indent.
-        vim.o.tabstop = 2          -- # of spaces a <Tab> in the file counts for.
-      '')
-    ];
+    xdg.configFile."nvim/init.lua".text =
+      let
+        lua = import ./lua { inherit pkgs; };
+      in
+        lib.mkMerge [
+          # Extra Lua configuration to be prepended to `init.lua`. Extend the
+          # Lua loader to search for our /nix/store/.../?.lua files.
+          (lib.mkBefore ''
+            package.path = '${lua}/?.lua;' .. package.path
+          '')
+          # Extra Lua configuration to be appended to `init.lua`.
+          (lib.mkAfter ''
+            vim.g.mapleader = ' '
+            vim.g.maplocalleader = '\\'
+            vim.o.colorcolumn = '80,100'
+            vim.o.equalalways = false -- Disable auto window resize.
+            vim.o.expandtab = true    -- Spaces instead of tabs.
+            vim.o.list = true         -- Show hidden characters.
+            vim.o.shiftwidth = 2      -- # of spaces to use for each (auto)indent.
+            vim.o.tabstop = 2         -- # of spaces a <Tab> in the file counts for.
+          '')
+        ];
   };
 }
