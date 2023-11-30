@@ -1,6 +1,7 @@
 { pkgs, bootstrap, ... }:
 {
   imports = [
+    ./bash
     ./git.nix
     ./lang/bash.nix
     ./lang/c.nix
