@@ -2,7 +2,7 @@
   description = "NixOS Flake";
 
   inputs = {
-    bootstrap.url = "github:jrpotter/bootstrap/1b4efbce4b1661895fdab7621a3a2d93186157e3";
+    bootstrap.url = "github:jrpotter/bootstrap/v0.1.2";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
