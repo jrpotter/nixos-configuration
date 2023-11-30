@@ -62,6 +62,8 @@ let
         bash
         c
         elixir
+        heex
+        html
         lua
         markdown
         nix
