@@ -2,12 +2,28 @@ args @ { config, pkgs, lib, ... }:
 let
   utils = import ./utils.nix args;
 
-  nightfox = {
+  colorscheme = {
     plugin = utils.pluginGit
       "eb82712f86319272f4b7b9dbb4ec6df650e6987f"
       "EdenEast/nightfox.nvim";
     config = ''
       vim.cmd('colorscheme nordfox')
+    '';
+  };
+
+  lualine = {
+    plugin = pkgs.vimPlugins.lualine-nvim;
+    config = ''
+      require('lualine').setup {
+        sections = {
+          lualine_x = {'encoding', 'filetype'},
+          lualine_y = {
+            require('init.statusline').get_active_lsp,
+            require('init.statusline').get_dap_status,
+          },
+          lualine_z = {'%c:%l:%%%p'},
+        },
+      }
     '';
   };
 
@@ -93,7 +109,8 @@ in
           inherit (p) plugin;
           config = "lua << EOF\n${p.config}\nEOF";
         } else p) [
-        nightfox
+        colorscheme  # Is always first.
+        lualine
         nvim-cmp
         nvim-dap
         nvim-lspconfig
@@ -103,6 +120,7 @@ in
         pkgs.vimPlugins.cmp-nvim-lsp
         pkgs.vimPlugins.cmp_luasnip
         pkgs.vimPlugins.luasnip
+        pkgs.vimPlugins.nvim-web-devicons
       ];
       viAlias = true;
       vimAlias = true;
