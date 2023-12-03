@@ -40,7 +40,7 @@ let
       "mfussenegger/nvim-dap";
     config = ''
       require('dap').defaults.fallback.terminal_win_cmd = 'below 10split new'
-      ${config.programs.neovim.nvim-dap};
+      ${config.programs.neovim.nvim-dap}
     '';
   };
 
@@ -123,6 +123,7 @@ in
         pkgs.vimPlugins.cmp_luasnip
         pkgs.vimPlugins.luasnip
         pkgs.vimPlugins.nvim-web-devicons
+        pkgs.vimPlugins.vim-prettier
       ];
       viAlias = true;
       vimAlias = true;
