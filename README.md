@@ -16,7 +16,22 @@ configurations together.
 
 ## Remotes
 
-Remote machines are handled on [DigitalOcean](https://www.digitalocean.com/),
-deployed using [colmena](https://github.com/zhaofengli/colmena). The custom
-image used by each droplet can be built using the top-level `digital-ocean`
-flake.
+Remote machines are hosted on [DigitalOcean](https://www.digitalocean.com/).
+The custom image used by each droplet can be built using the top-level
+`digital-ocean` flake. This image disables a root password in favor of SSH.
+A droplet running this image will automatically pull in any enabled SSH keys
+from your DigitalOcean account at creation time.
+
+Deployment is managed using [colmena](https://github.com/zhaofengli/colmena).
+To deploy, run the following:
+```bash
+$ cd hive
+$ colmena apply
+```
+Note that colmena requires non-interactivity. If you haven't done so already,
+you'll likely need to add the private SSH key corresponding to the public one
+uploaded to DigitalOcean to your SSH agent. Do so by running:
+```bash
+$ eval $(ssh-agent -s)
+$ ssh-add <ssh-file>
+```
