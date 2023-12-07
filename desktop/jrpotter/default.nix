@@ -24,6 +24,8 @@
       bitwarden
       bootstrap
       colmena
+      dig
+      file
       firefox
       gimp
       mullvad-vpn
