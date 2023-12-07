@@ -23,6 +23,7 @@
       anki-bin
       bitwarden
       bootstrap
+      colmena
       firefox
       gimp
       mullvad-vpn
