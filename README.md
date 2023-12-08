@@ -30,6 +30,12 @@ when creating a new droplet).
 
 Secrets are managed via [sops-nix](https://github.com/Mic92/sops-nix). The
 top-level `.sops.yaml` configures the `age` keys used to encrypt all secrets.
+Once configured, you can create/edit a new secrets file using `sops` like so:
+```bash
+$ nix-shell -p sops --run "sops <filename>"
+```
+Keep in mind that `sops-nix` supports YAML, JSON, INI, dotenv and binary at the
+moment. What format is used is determined by `<filename>`'s extension.
 
 #### Admins
 
