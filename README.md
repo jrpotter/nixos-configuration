@@ -25,7 +25,8 @@ from your DigitalOcean account at creation time.
 Deployment is managed using [colmena](https://github.com/zhaofengli/colmena).
 To deploy, run the following:
 ```bash
-$ cd hive
+$ cd infra
+$ nix flake update  # If any machine changes were made.
 $ colmena apply
 ```
 Note that colmena requires non-interactivity. If you haven't done so already,
