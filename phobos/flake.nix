@@ -1,11 +1,10 @@
 {
-  description = "Phobos machine";
+  description = "Remote machine - phobos";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     boardwise = {
       url = "github:boardwise-gg/website/v0.1.0";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -20,13 +19,7 @@
         sops-nix.nixosModules.sops
       ];
 
-      sops.defaultSopsFile = ./secrets.yaml;
-      sops.secrets.example-key = {};
-      sops.secrets."myservice/my_subdir/my_secret" = {};
-
-      deployment = {
-        targetHost = "146.190.127.180";
-      };
+      deployment.targetHost = "146.190.127.180";
 
       networking = {
         hostName = "phobos";
@@ -54,6 +47,10 @@
           DATABASE_URL="ecto://postgres:postgres@localhost/boardwise";
         };
       };
+
+      sops.defaultSopsFile = ./secrets.yaml;
+      sops.secrets.example-key = {};
+      sops.secrets."myservice/my_subdir/my_secret" = {};
 
       system.stateVersion = "23.11";
     };

@@ -59,7 +59,7 @@
 
   hardware.bluetooth.enable = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = "framework";
   networking.networkmanager.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
