@@ -7,13 +7,22 @@
       url = "github:boardwise-gg/website/v0.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { boardwise, ... }: {
+  outputs = { boardwise, sops-nix, ... }: {
     nixosModules.default = { modulesPath, pkgs, lib, system, ... }: {
       imports = lib.optional (builtins.pathExists ./do-userdata.nix) ./do-userdata.nix ++ [
         (modulesPath + "/virtualisation/digital-ocean-config.nix")
+        sops-nix.nixosModules.sops
       ];
+
+      sops.defaultSopsFile = ./secrets.yaml;
+      sops.secrets.example-key = {};
+      sops.secrets."myservice/my_subdir/my_secret" = {};
 
       deployment = {
         targetHost = "146.190.127.180";

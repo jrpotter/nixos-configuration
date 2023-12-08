@@ -1,0 +1,13 @@
+keys:
+  - &admin_jrpotter age1huyyxsy4g0e5svmcejxvvdjnnk6qkulgd3qfpue59exnfrnqzudspxnn62
+  - &server_phobos age1lmx6334s0y2ecfpve00vcjemyechycda2g8c5nnpzs5py2qay9pqx8m3vs
+creation_rules:
+  - path_regex: phobos/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *admin_jrpotter
+      - *server_phobos
+  - path_regex: .*
+    key_groups:
+    - age:
+      - *admin_jrpotter
