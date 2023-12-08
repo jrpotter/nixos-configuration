@@ -10,13 +10,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
   };
 
-  outputs = { self, nixpkgs, home-manager, bootstrap, ... }:
+  outputs = { nixpkgs, home-manager, bootstrap, ... }:
     let
       system = "x86_64-linux";
     in
     {
-      # Used with `nixos-rebuild --flake .#<hostname>`
-      # nixosConfigurations."<hostname>".config.system.build.toplevel must be a derivation
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         inherit system;
         # Modules can be attribute sets or a function that returns an attribute set.

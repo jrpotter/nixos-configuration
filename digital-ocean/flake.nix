@@ -15,8 +15,7 @@
         ];
         system.stateVersion = "23.11";
       };
-    in
-    {
+    in {
       packages.${system}.default = (pkgs.nixos module).digitalOceanImage;
     };
 }
