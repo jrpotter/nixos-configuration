@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     boardwise.url = "github:boardwise-gg/website/v0.1.0";
-    coach-scraper.url = "github:boardwise-gg/coach-scraper/v0.1.3";
+    coach-scraper.url = "github:boardwise-gg/coach-scraper/58815d3ae5a69cac12436a01e77019a5ac5d16a7";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -63,7 +63,14 @@
       sops.defaultSopsFile = ./secrets.yaml;
       sops.secrets.SECRET_KEY_BASE = {};
 
-      system.stateVersion = "23.11";
+       swapDevices = [
+        {
+          device = "/var/lib/swapfile";
+          size = 16*1024;
+        }
+      ];
+
+      system.stateVersion = "23.05";
     };
   };
 }

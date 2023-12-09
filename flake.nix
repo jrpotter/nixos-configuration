@@ -3,14 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
-    framework = {
-      url = "path:./framework";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    phobos = {
-      url = "path:./phobos";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    framework.url = "path:./framework";
+    phobos.url = "path:./phobos";
   };
 
   outputs = { nixpkgs, framework, phobos, ... }:
