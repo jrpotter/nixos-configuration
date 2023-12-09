@@ -4,13 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     boardwise.url = "github:boardwise-gg/website/v0.1.0";
+    coach-scraper.url = "github:boardwise-gg/coach-scraper/v0.1.3";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { boardwise, sops-nix, ... }: {
+  outputs = { boardwise, coach-scraper, sops-nix, ... }: {
     nixosModules.default = { modulesPath, pkgs, lib, system, ... }: {
       imports = lib.optional (builtins.pathExists ./do-userdata.nix) ./do-userdata.nix ++ [
         (modulesPath + "/virtualisation/digital-ocean-config.nix")
@@ -54,6 +55,10 @@
           Restart = "on-failure";
         };
       };
+
+      environment.systemPackages = [
+        coach-scraper.packages.${system}.app
+      ];
 
       sops.defaultSopsFile = ./secrets.yaml;
       sops.secrets.SECRET_KEY_BASE = {};
