@@ -208,7 +208,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-Gze86YwZxMbiW01weBEoPXyNEdAuj+hBTtT/shr/wSo=",
+        "narHash": "sha256-12GAm+zOFk5V1yHAV/LeBvV/kLqE9Cz9WeCSEZbimxQ=",
         "path": "./phobos",
         "type": "path"
       },

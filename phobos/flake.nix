@@ -38,32 +38,20 @@
         '';
       };
 
-      systemd = {
-        services.boardwise = {
-          enable = true;
-          description = "BoardWise Server";
-          after = [ "postgresql.service" ];
-          requires = [ "postgresql.service" ];
-          serviceConfig = {
-            Environment = [
-              "PORT=80"
-              "DATABASE_URL=ecto://postgres:postgres@localhost/boardwise"
-            ];
-            EnvironmentFile = "/run/secrets/SECRET_KEY_BASE";
-            ExecStartPre = "${boardwise.packages.${system}.app}/bin/migrate";
-            ExecStart = "${boardwise.packages.${system}.app}/bin/boardwise start";
-            Restart = "on-failure";
-          };
-          unitConfig = {
-            ConditionPathExists = "/run/secrets/SECRET_KEY_BASE";
-          };
-        };
-        paths.SECRET_KEY_BASE = {
-          enable = true;
-          pathConfig = {
-            PathExists = "/run/secrets/SECRET_KEY_BASE";
-            Unit = "boardwise.service";
-          };
+      systemd.services.boardwise = {
+        enable = true;
+        description = "BoardWise Server";
+        after = [ "postgresql.service" ];
+        requires = [ "postgresql.service" ];
+        serviceConfig = {
+          Environment = [
+            "PORT=80"
+            "DATABASE_URL=ecto://postgres:postgres@localhost/boardwise"
+          ];
+          EnvironmentFile = "/run/secrets/SECRET_KEY_BASE";
+          ExecStartPre = "${boardwise.packages.${system}.app}/bin/migrate";
+          ExecStart = "${boardwise.packages.${system}.app}/bin/boardwise start";
+          Restart = "on-failure";
         };
       };
 
