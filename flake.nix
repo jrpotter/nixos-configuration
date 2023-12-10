@@ -5,11 +5,13 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     framework.url = "path:./hive/framework";
     phobos.url = "path:./hive/phobos";
+    titan.url = "path:./hive/titan";
   };
 
-  outputs = { nixpkgs, framework, phobos, ... }:
+  outputs = { nixpkgs, framework, phobos, titan, ... }:
     let
       system = "x86_64-linux";
+      jrpotter = import ./users/jrpotter;
     in
     {
       colmena = {
@@ -17,9 +19,8 @@
           nixpkgs = import nixpkgs { inherit system; };
           specialArgs = { inherit system; };
           nodeSpecialArgs = {
-            framework = {
-              jrpotter = import ./users/jrpotter;
-            };
+            framework = { inherit jrpotter; };
+            titan = { inherit jrpotter; };
           };
         };
 
@@ -36,6 +37,7 @@
         # Remote machines. Deploy using `colmena apply`
 
         phobos = phobos.nixosModules.default;
+        titan = titan.nixosModules.default;
       };
     };
 }
