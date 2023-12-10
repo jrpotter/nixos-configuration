@@ -26,7 +26,7 @@ in
     packages = with pkgs; [
       anki-bin
       bitwarden
-      bootstrap
+      bootstrap.packages.${system}.default
       colmena
       dig
       file
