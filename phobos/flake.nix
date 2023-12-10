@@ -2,7 +2,7 @@
   description = "Remote machine - phobos";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     boardwise.url = "github:boardwise-gg/website/v0.1.0";
     coach-scraper.url = "github:boardwise-gg/coach-scraper/58815d3ae5a69cac12436a01e77019a5ac5d16a7";
     sops-nix = {
@@ -18,7 +18,7 @@
         sops-nix.nixosModules.sops
       ];
 
-      deployment.targetHost = "146.190.127.180";
+      deployment.targetHost = "164.92.107.155";
 
       networking = {
         hostName = "phobos";
@@ -63,14 +63,7 @@
       sops.defaultSopsFile = ./secrets.yaml;
       sops.secrets.SECRET_KEY_BASE = {};
 
-       swapDevices = [
-        {
-          device = "/var/lib/swapfile";
-          size = 16*1024;
-        }
-      ];
-
-      system.stateVersion = "23.05";
+      system.stateVersion = "23.11";
     };
   };
 }

@@ -13,6 +13,7 @@
         imports = [
           "${nixpkgs}/nixos/modules/virtualisation/digital-ocean-image.nix"
         ];
+
         system.stateVersion = "23.11";
       };
     in {
