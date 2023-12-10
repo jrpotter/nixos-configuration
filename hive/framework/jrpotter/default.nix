@@ -28,6 +28,7 @@
       file
       firefox
       gimp
+      mosh
       mullvad-vpn
       unzip
       wezterm
