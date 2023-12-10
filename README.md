@@ -21,10 +21,10 @@ $ colmena apply-local [--sudo]
 
 Remote machines are hosted on [DigitalOcean](https://www.digitalocean.com/).
 The custom image used by each droplet can be built using the top-level
-`digital-ocean` flake. This image disables a root password in favor of SSH.
-A droplet running this image will automatically pull in any enabled SSH keys
-from your DigitalOcean account at creation time (so make sure to include them
-when creating a new droplet).
+`images/digital-ocean-23.11pre-git` flake. This image disables a root password
+in favor of SSH. A droplet running this image will automatically pull in any
+enabled SSH keys from your DigitalOcean account at creation time (so make sure
+to include them when creating a new droplet).
 
 ### Secrets
 
