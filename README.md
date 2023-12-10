@@ -3,16 +3,17 @@
 The collection of publically visible nixos-configuration files used for all of
 my NixOS machines. Deployment (both local and remote) is managed using
 [colmena](https://github.com/zhaofengli/colmena). All machines can be found in
-the top-level `flake.nix` file.
+the `hive/flake.nix` file.
 
 ## Local Machines
 
-My personal laptop configuration is reflected in the top-level `framework`
-directory (named after the [framework](https://frame.work/) laptop I use). This
-flake defines a [home-manager](https://nix-community.github.io/home-manager/)
+My personal laptop configuration is reflected in the `hive/framework` directory
+(named after the [framework](https://frame.work/) laptop I use). This flake
+defines a [home-manager](https://nix-community.github.io/home-manager/)
 configuration for a single user called `jrpotter`. We can apply a
 `nixos-rebuild switch` by running:
 ```bash
+$ cd hive
 $ nix flake update  # If any changes were made to local machines.
 $ colmena apply-local [--sudo]
 ```
@@ -21,7 +22,7 @@ $ colmena apply-local [--sudo]
 
 Remote machines are hosted on [DigitalOcean](https://www.digitalocean.com/).
 The custom image used by each droplet can be built using the top-level
-`images/digital-ocean-23.11pre-git` flake. This image disables a root password
+`digital-ocean/23.11pre-git` flake. This image disables a root password
 in favor of SSH. A droplet running this image will automatically pull in any
 enabled SSH keys from your DigitalOcean account at creation time (so make sure
 to include them when creating a new droplet).
@@ -80,6 +81,7 @@ $ ssh-add ~/.ssh/id_ed25519
 ```
 Afterward you can run the following:
 ```bash
+$ cd hive
 $ nix flake update  # If any changes were made to remote machines.
 $ colmena apply
 ```
