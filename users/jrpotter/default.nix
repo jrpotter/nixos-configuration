@@ -1,4 +1,8 @@
-{ pkgs, bootstrap, stateVersion, ... }:
+{ stateVersion, pkgs, ... }:
+let
+  bootstrap = builtins.getFlake
+    "github:jrpotter/bootstrap/635395b9cc946d8c8f1851b5c4dc6210fb54e400";
+in
 {
   imports = [
     ./bash
