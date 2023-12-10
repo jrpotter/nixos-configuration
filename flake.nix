@@ -3,8 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
-    framework.url = "path:./framework";
-    phobos.url = "path:./phobos";
+    framework.url = "path:./hive/framework";
+    phobos.url = "path:./hive/phobos";
   };
 
   outputs = { nixpkgs, framework, phobos, ... }:
@@ -16,6 +16,11 @@
         meta = {
           nixpkgs = import nixpkgs { inherit system; };
           specialArgs = { inherit system; };
+          nodeSpecialArgs = {
+            framework = {
+              jrpotter = import ./users/jrpotter;
+            };
+          };
         };
 
         # Local machines. Deploy using `colmena apply-local [--sudo]`

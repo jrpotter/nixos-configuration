@@ -189,12 +189,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-w34b9SS0gjjLG3TGyHlSym5j2KeAgRnjFAeAnSIiF7s=",
-        "path": "./framework",
+        "narHash": "sha256-Vhq9jZLDEPDZPxrL8yiMsEAz7AWySO0a5WDCMXRRorU=",
+        "path": "./hive/framework",
         "type": "path"
       },
       "original": {
-        "path": "./framework",
+        "path": "./hive/framework",
         "type": "path"
       }
     },
@@ -349,11 +349,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-uviT1vNgSZnpddGqgHZUwKDPl/VYRz92X7hnw72yiTY=",
-        "path": "./phobos",
+        "path": "./hive/phobos",
         "type": "path"
       },
       "original": {
-        "path": "./phobos",
+        "path": "./hive/phobos",
         "type": "path"
       }
     },

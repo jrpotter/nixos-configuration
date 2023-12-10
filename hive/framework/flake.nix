@@ -14,26 +14,43 @@
   };
 
   outputs = { bootstrap, home-manager, ... }: {
-    nixosModules.default = { pkgs, system, ... }:
+    nixosModules.default = { pkgs, system, jrpotter, ... }:
       let
-        jrpotter-home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.jrpotter = import ./jrpotter;
-
-          # Used to pass non-default parameters to submodules.
-          extraSpecialArgs = {
-            inherit system;
-            bootstrap = bootstrap.packages.${system}.default;
-          };
-        };
+        # This value determines the NixOS and home-manager release from which
+        # the default settings for stateful data, like file locations and
+        # database versions on your system were taken. This should probably
+        # never change.
+        stateVersion = "23.05";
       in
       {
         imports = [
+          ./hardware-configuration.nix
           ./configuration.nix
           home-manager.nixosModules.home-manager
-          { home-manager = jrpotter-home-manager; }
         ];
+
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.jrpotter = jrpotter;
+
+          # Used to pass non-default parameters to submodules.
+          extraSpecialArgs = {
+            inherit system stateVersion;
+            bootstrap = bootstrap.packages.${system}.default;
+          };
+        };
+
+        users.users.jrpotter = {
+          isNormalUser = true;
+          extraGroups = [
+            "docker"
+            "networkmanager"
+            "wheel"
+          ];
+        };
+
+        system.stateVersion = stateVersion;
       };
   };
 }
