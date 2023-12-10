@@ -3,7 +3,7 @@
 The collection of publically visible nixos-configuration files used for all of
 my NixOS machines. Deployment (both local and remote) is managed using
 [colmena](https://github.com/zhaofengli/colmena). All machines can be found in
-the `hive/flake.nix` file.
+the `flake.nix` file.
 
 ## Local Machines
 
@@ -13,7 +13,6 @@ defines a [home-manager](https://nix-community.github.io/home-manager/)
 configuration for a single user called `jrpotter`. We can apply a
 `nixos-rebuild switch` by running:
 ```bash
-$ cd hive
 $ nix flake update  # If any changes were made to local machines.
 $ colmena apply-local [--sudo]
 ```
@@ -81,7 +80,6 @@ $ ssh-add ~/.ssh/id_ed25519
 ```
 Afterward you can run the following:
 ```bash
-$ cd hive
 $ nix flake update  # If any changes were made to remote machines.
 $ colmena apply
 ```

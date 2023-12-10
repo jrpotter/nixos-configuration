@@ -481,7 +481,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-uviT1vNgSZnpddGqgHZUwKDPl/VYRz92X7hnw72yiTY=",
+        "narHash": "sha256-z3aSggYEk2UIsG7BMKX4qZXmwT9AiQFUqTNz6OoxUMU=",
         "path": "./hive/phobos",
         "type": "path"
       },
