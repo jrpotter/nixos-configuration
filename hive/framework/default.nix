@@ -9,7 +9,24 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.jrpotter = import ../../users/jrpotter;
+    users.jrpotter = args@{ pkgs, lib, ... }:
+      let
+        base = import ../../users/jrpotter args;
+      in
+        lib.attrsets.updateManyAttrsByPath [
+          {
+            path = [ "home" "packages" ];
+            update = old: old ++ (with pkgs; [
+              anki-bin
+              bitwarden
+              firefox
+              gimp
+              wezterm
+              zotero
+            ]);
+          }
+        ] base;
+
     # Used to pass non-default parameters to submodules.
     extraSpecialArgs = { inherit system stateVersion; };
   };

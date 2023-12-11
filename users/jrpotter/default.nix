@@ -24,19 +24,13 @@ in
     username = "jrpotter";
     homeDirectory = "/home/jrpotter";
     packages = with pkgs; [
-      anki-bin
-      bitwarden
       bootstrap.packages.${system}.default
       colmena
       dig
       file
-      firefox
-      gimp
       mosh
       mullvad-vpn
       unzip
-      wezterm
-      zotero
     ];
   };
 
