@@ -5,9 +5,15 @@
     home-manager.nixosModules.home-manager
   ];
 
-  deployment.targetHost = "143.198.97.253";
+  deployment.targetHost = "161.35.235.205";
 
   networking.hostName = "titan";
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  services.openssh.enable = true;
+
+  programs.mosh.enable = true;
 
   home-manager = {
     useGlobalPkgs = true;

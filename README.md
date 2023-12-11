@@ -24,7 +24,7 @@ $ colmena apply-local [--sudo]
 Remote machines are hosted on [DigitalOcean](https://www.digitalocean.com/).
 The custom images used by each droplet is built by running:
 ```bash
-$ nix build #.digital-ocean.[stoat|tapir]
+$ nix build .#digital-ocean.[stoat|tapir]
 ```
 The above command produces an image with root password disabled in favor of SSH.
 A droplet running this image will automatically pull in any enabled SSH keys
