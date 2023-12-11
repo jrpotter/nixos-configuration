@@ -11,7 +11,14 @@
     useUserPackages = true;
     users.jrpotter = args@{ pkgs, lib, ... }:
       let
-        base = import ../../users/jrpotter args;
+        base = import ../../users/jrpotter args // {
+          dconf.settings = {
+            "org/virt-manager/virt-manager/connections" = {
+              autoconnect = ["qemu:///system"];
+              uris = ["qemu:///system"];
+            };
+          };
+        };
       in
         lib.attrsets.updateManyAttrsByPath [
           {
@@ -21,6 +28,7 @@
               bitwarden
               firefox
               gimp
+              virt-manager
               wezterm
               zotero
             ]);
@@ -31,11 +39,15 @@
     extraSpecialArgs = { inherit system stateVersion; };
   };
 
+  # virt-manager requires dconf to remember settings.
+  programs.dconf.enable = true;
+
   users.users.jrpotter = {
     isNormalUser = true;
     extraGroups = [
       "docker"
       "networkmanager"
+      "libvirtd"
       "wheel"
     ];
   };

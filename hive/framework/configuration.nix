@@ -75,10 +75,13 @@
 
   time.timeZone = "America/Denver";
 
-  virtualisation.docker.rootless = {
-    enable = true;
-    # Sets the `DOCKER_HOST` variable to the rootless Docker instance for normal
-    # users by default.
-    setSocketVariable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    docker.rootless = {
+      enable = true;
+      # Sets the `DOCKER_HOST` variable to the rootless Docker instance for normal
+      # users by default.
+      setSocketVariable = true;
+    };
   };
 }
