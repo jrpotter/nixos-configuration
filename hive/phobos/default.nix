@@ -1,7 +1,7 @@
 { system, stateVersion, sops-nix, pkgs, lib, ... }:
 let
   boardwise = builtins.getFlake
-    "github:boardwise-gg/website/c605a09c56234b2c2c0e4593da8f3b798723a5d7";
+    "github:boardwise-gg/website/0c7d2b5932f06912034d8da3d13008cc53c50245";
   coach-scraper = builtins.getFlake
     "github:boardwise-gg/coach-scraper/58815d3ae5a69cac12436a01e77019a5ac5d16a7";
 in
@@ -54,13 +54,19 @@ in
 
   environment.systemPackages = [
     coach-scraper.packages.${system}.app
+    pkgs.mullvad-vpn
   ];
 
-  sops.defaultSopsFile = ./secrets.yaml;
-  sops.secrets.SECRET_KEY_BASE = {};
+  sops = {
+    defaultSopsFile = ./secrets.yaml;
+    secrets.SECRET_KEY_BASE = {};
+  };
 
-  security.acme.acceptTerms = true;
-  security.acme.defaults.email = "jrpotter2112@gmail.com";
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "jrpotter2112@gmail.com";
+  };
+
   services.nginx = {
     enable = true;
     virtualHosts = {

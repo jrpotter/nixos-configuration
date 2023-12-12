@@ -86,5 +86,13 @@
           inherit (tapir) pkgs stateVersion;
         };
       };
+
+      devShells.${system}.default =
+        let
+          pkgs = stoat.pkgs;
+        in
+          pkgs.mkShell {
+            packages = with pkgs; [ ssh-to-age sops ];
+          };
     };
 }
