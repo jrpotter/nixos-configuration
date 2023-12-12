@@ -21,9 +21,9 @@ in
     };
   };
 
-  services.openssh.enable = true;
-
   programs.mosh.enable = true;
+
+  services.openssh.enable = true;
 
   services.postgresql = {
     enable = true;
@@ -54,7 +54,6 @@ in
 
   environment.systemPackages = [
     coach-scraper.packages.${system}.app
-    pkgs.mullvad-vpn
   ];
 
   sops = {
