@@ -26,6 +26,7 @@
             update = old: old ++ (with pkgs; [
               anki-bin
               bitwarden
+              chromium
               firefox
               gimp
               virt-manager
