@@ -21,6 +21,10 @@ in
     };
   };
 
+  services.openssh.enable = true;
+
+  programs.mosh.enable = true;
+
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_15;
@@ -39,7 +43,6 @@ in
     requires = [ "postgresql.service" ];
     serviceConfig = {
       Environment = [
-        "PORT=80"
         "DATABASE_URL=ecto://postgres:postgres@localhost/boardwise"
       ];
       EnvironmentFile = "/run/secrets/SECRET_KEY_BASE";
@@ -55,6 +58,23 @@ in
 
   sops.defaultSopsFile = ./secrets.yaml;
   sops.secrets.SECRET_KEY_BASE = {};
+
+  security.acme.acceptTerms = true;
+  security.acme.defaults.email = "jrpotter2112@gmail.com";
+  services.nginx = {
+    enable = true;
+    virtualHosts = {
+      "www.boardwise.gg" = {
+        # forceSSL = true;
+        enableACME = true;
+        serverAliases = [ "boardwise.gg" ];
+        locations."/" = {
+          recommendedProxySettings = true;
+          proxyPass = "http://127.0.0.1:4000";
+        };
+      };
+    };
+  };
 
   system.stateVersion = stateVersion;
 }

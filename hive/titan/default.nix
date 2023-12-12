@@ -5,11 +5,11 @@
     home-manager.nixosModules.home-manager
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   deployment.targetHost = "143.110.158.6";
 
   networking.hostName = "titan";
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.openssh.enable = true;
 
