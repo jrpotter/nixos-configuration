@@ -1,7 +1,7 @@
 { system, stateVersion, sops-nix, pkgs, lib, ... }:
 let
   boardwise = builtins.getFlake
-    "github:boardwise-gg/website/0c7d2b5932f06912034d8da3d13008cc53c50245";
+    "github:boardwise-gg/website/db73e3b4f06659fd477be8e76594c01a185f1496";
   coach-scraper = builtins.getFlake
     "github:boardwise-gg/coach-scraper/58815d3ae5a69cac12436a01e77019a5ac5d16a7";
 in
