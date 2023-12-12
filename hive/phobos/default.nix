@@ -11,7 +11,7 @@ in
     sops-nix.nixosModules.sops
   ];
 
-  deployment.targetHost = null;
+  deployment.targetHost = "143.198.142.171";
 
   networking = {
     hostName = "phobos";

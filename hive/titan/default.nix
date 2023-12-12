@@ -5,7 +5,7 @@
     home-manager.nixosModules.home-manager
   ];
 
-  deployment.targetHost = "161.35.235.205";
+  deployment.targetHost = "143.110.158.6";
 
   networking.hostName = "titan";
 
