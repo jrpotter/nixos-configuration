@@ -1,4 +1,4 @@
-{ system, stateVersion, sops-nix, modulesPath, pkgs, lib, ... }:
+{ system, stateVersion, sops-nix, pkgs, lib, ... }:
 let
   boardwise = builtins.getFlake
     "github:boardwise-gg/website/c605a09c56234b2c2c0e4593da8f3b798723a5d7";
@@ -7,7 +7,7 @@ let
 in
 {
   imports = lib.optional (builtins.pathExists ./do-userdata.nix) ./do-userdata.nix ++ [
-    (modulesPath + "/virtualisation/digital-ocean-config.nix")
+    ../../digital-ocean/configuration.nix
     sops-nix.nixosModules.sops
   ];
 
@@ -65,7 +65,7 @@ in
     enable = true;
     virtualHosts = {
       "www.boardwise.gg" = {
-        # forceSSL = true;
+        forceSSL = true;
         enableACME = true;
         serverAliases = [ "boardwise.gg" ];
         locations."/" = {

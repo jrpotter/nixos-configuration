@@ -36,10 +36,12 @@ with lib;
         autoResize = true;
         fsType = "ext4";
       };
+
       swapDevices = [
         # Configured in `make-disk-image.nix`.
         { device = "/dev/disk/by-label/swap"; }
       ];
+
       boot = {
         growPartition = true;
         kernelParams = [ "console=ttyS0" "panic=1" "boot.panic_on_fail" ];
@@ -51,11 +53,15 @@ with lib;
           grub.configurationLimit = 0;
         };
       };
-      services.openssh = {
-        enable = mkDefault true;
-        settings.PasswordAuthentication = mkDefault false;
+
+      services = {
+        do-agent.enable = mkDefault true;
+        openssh = {
+          enable = mkDefault true;
+          settings.PasswordAuthentication = mkDefault false;
+        };
       };
-      services.do-agent.enable = mkDefault true;
+
       networking = {
         hostName = mkDefault ""; # use Digital Ocean metadata server
       };
