@@ -1,7 +1,9 @@
 { system, stateVersion, lib, ... }:
 let
   blog = builtins.getFlake
-    "github:jrpotter/blog/689107113f248cc2cad2a53d9f7d32be484c9060";
+    "github:jrpotter/blog/d5e3dba9f2620050365084e396bd481e68dd3795";
+  portfolio = builtins.getFlake
+    "github:jrpotter/portfolio/d07f24b8087f712f6d2436e2fbc4af6b56518ce6";
 in
 {
   imports = lib.optional (builtins.pathExists ./do-userdata.nix) ./do-userdata.nix ++ [
@@ -30,6 +32,14 @@ in
   services.nginx = {
     enable = true;
     virtualHosts = {
+      "www.jrpotter.com" = {
+        forceSSL = true;
+        enableACME = true;
+        serverAliases = [ "jrpotter.com" ];
+        locations."/" = {
+          root = portfolio.packages.${system}.app;
+        };
+      };
       "blog.jrpotter.com" = {
         forceSSL = true;
         enableACME = true;
