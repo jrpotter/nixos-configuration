@@ -53,6 +53,9 @@
             framework = {
               inherit (stoat) stateVersion home-manager;
             };
+            deimos = {
+              inherit (tapir) stateVersion;
+            };
             phobos = {
               inherit (tapir) stateVersion sops-nix;
             };
@@ -74,6 +77,7 @@
 
         # Remote machines. Deploy using `colmena apply`
 
+        deimos.imports = [ ./hive/deimos ];
         phobos.imports = [ ./hive/phobos ];
         titan.imports = [ ./hive/titan ];
       };

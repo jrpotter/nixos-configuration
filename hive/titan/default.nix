@@ -7,7 +7,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  deployment.targetHost = "143.110.158.6";
+  deployment.targetHost = null;
 
   networking.hostName = "titan";
 
