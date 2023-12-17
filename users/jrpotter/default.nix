@@ -1,7 +1,7 @@
 { stateVersion, pkgs, ... }:
 let
   bootstrap = builtins.getFlake
-    "github:jrpotter/bootstrap/0aaa1ebc38c19463f2077c9f4b6002a28c1d1b2c";
+    "github:jrpotter/bootstrap/fc047f09dd45ac4822fc11b109942f603573419c";
 in
 {
   imports = [

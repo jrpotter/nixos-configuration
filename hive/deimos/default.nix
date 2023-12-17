@@ -1,9 +1,9 @@
 { system, stateVersion, lib, ... }:
 let
   blog = builtins.getFlake
-    "github:jrpotter/blog/d5e3dba9f2620050365084e396bd481e68dd3795";
+    "github:jrpotter/blog/29a44a257989ab85a38690b18debfe1b27a70674";
   portfolio = builtins.getFlake
-    "github:jrpotter/portfolio/d07f24b8087f712f6d2436e2fbc4af6b56518ce6";
+    "github:jrpotter/portfolio/78faa488531af4edcf6c1a0bbe6318350a65dbbd";
   bookshelf = builtins.getFlake
     "github:jrpotter/bookshelf/bf9888c050b7a62f58be0198af19a6de7c40b375";
 in
