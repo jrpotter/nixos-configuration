@@ -3,7 +3,7 @@ let
   blog = builtins.getFlake
     "github:jrpotter/blog/29a44a257989ab85a38690b18debfe1b27a70674";
   portfolio = builtins.getFlake
-    "github:jrpotter/portfolio/78faa488531af4edcf6c1a0bbe6318350a65dbbd";
+    "github:jrpotter/portfolio/994e1391ed081bf529679c8965668e55462700ea";
   bookshelf = builtins.getFlake
     "github:jrpotter/bookshelf/bf9888c050b7a62f58be0198af19a6de7c40b375";
 in
