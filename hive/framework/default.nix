@@ -30,6 +30,7 @@
               firefox
               gimp
               virt-manager
+              vlc
               wezterm
               zotero
             ]);
