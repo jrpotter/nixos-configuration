@@ -46,21 +46,15 @@
           specialArgs = { inherit system; };
           nodeNixpkgs = {
             framework = stoat.pkgs;
+            deimos = tapir.pkgs;
             phobos = tapir.pkgs;
-            titan = stoat.pkgs;
           };
           nodeSpecialArgs = {
             framework = {
-              inherit (stoat) stateVersion home-manager;
-            };
-            deimos = {
-              inherit (tapir) stateVersion;
+              inherit (stoat) home-manager;
             };
             phobos = {
-              inherit (tapir) stateVersion sops-nix;
-            };
-            titan = {
-              inherit (stoat) stateVersion home-manager;
+              inherit (tapir) sops-nix;
             };
           };
         };
@@ -79,15 +73,14 @@
 
         deimos.imports = [ ./hive/deimos ];
         phobos.imports = [ ./hive/phobos ];
-        titan.imports = [ ./hive/titan ];
       };
 
       packages.${system}.digital-ocean = {
         stoat = import ./digital-ocean {
-          inherit (stoat) pkgs stateVersion;
+          inherit (stoat) pkgs;
         };
         tapir = import ./digital-ocean {
-          inherit (tapir) pkgs stateVersion;
+          inherit (tapir) pkgs;
         };
       };
 

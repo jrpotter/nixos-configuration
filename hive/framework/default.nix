@@ -1,4 +1,4 @@
-{ system, stateVersion, home-manager, ... }:
+{ system, home-manager, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -38,7 +38,10 @@
         ] base;
 
     # Used to pass non-default parameters to submodules.
-    extraSpecialArgs = { inherit system stateVersion; };
+    extraSpecialArgs = {
+      inherit system;
+      stateVersion = "23.05";
+    };
   };
 
   # virt-manager requires dconf to remember settings.
@@ -54,5 +57,5 @@
     ];
   };
 
-  system.stateVersion = stateVersion;
+  system.stateVersion = "23.05";
 }
