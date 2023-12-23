@@ -23,17 +23,33 @@ in
 
   programs.mosh.enable = true;
 
-  services.openssh.enable = true;
-
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_15;
-    ensureDatabases = [ "boardwise" ];
-    authentication = lib.mkOverride 10 ''
-      # TYPE     DATABASE     USER     ADDRESS         METHOD
-        local    all          all                      trust
-        host     all          all      127.0.0.1/32    trust
-    '';
+  services = {
+    forgejo.enable = true;
+    nginx = {
+      enable = true;
+      virtualHosts = {
+        "www.boardwise.gg" = {
+          forceSSL = true;
+          enableACME = true;
+          serverAliases = [ "boardwise.gg" ];
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyPass = "http://127.0.0.1:4000";
+          };
+        };
+      };
+    };
+    openssh.enable = true;
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_15;
+      ensureDatabases = [ "boardwise" ];
+      authentication = lib.mkOverride 10 ''
+        # TYPE     DATABASE     USER     ADDRESS         METHOD
+          local    all          all                      trust
+          host     all          all      127.0.0.1/32    trust
+      '';
+    };
   };
 
   systemd.services.boardwise = {
@@ -64,21 +80,6 @@ in
   security.acme = {
     acceptTerms = true;
     defaults.email = "jrpotter2112@gmail.com";
-  };
-
-  services.nginx = {
-    enable = true;
-    virtualHosts = {
-      "www.boardwise.gg" = {
-        forceSSL = true;
-        enableACME = true;
-        serverAliases = [ "boardwise.gg" ];
-        locations."/" = {
-          recommendedProxySettings = true;
-          proxyPass = "http://127.0.0.1:4000";
-        };
-      };
-    };
   };
 
   system.stateVersion = "23.11";

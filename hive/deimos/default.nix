@@ -24,39 +24,46 @@ in
 
   programs.mosh.enable = true;
 
-  services.openssh.enable = true;
+  services = {
+    nginx = {
+      enable = true;
+      virtualHosts = {
+        "www.jrpotter.com" = {
+          forceSSL = true;
+          enableACME = true;
+          serverAliases = [ "jrpotter.com" ];
+          locations."/" = {
+            root = portfolio.packages.${system}.app;
+          };
+        };
+        "blog.jrpotter.com" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            root = blog.packages.${system}.app;
+          };
+        };
+        "bookshelf.jrpotter.com" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            root = bookshelf.packages.${system}.app;
+          };
+        };
+        "git.jrpotter.com" = {
+          locations."/" = {
+            recommendedProxySettings = true;
+            proxyPass = "http://127.0.0.1:3000";
+          };
+        };
+      };
+    };
+    openssh.enable = true;
+  };
 
   security.acme = {
     acceptTerms = true;
     defaults.email = "jrpotter2112@gmail.com";
-  };
-
-  services.nginx = {
-    enable = true;
-    virtualHosts = {
-      "www.jrpotter.com" = {
-        forceSSL = true;
-        enableACME = true;
-        serverAliases = [ "jrpotter.com" ];
-        locations."/" = {
-          root = portfolio.packages.${system}.app;
-        };
-      };
-      "blog.jrpotter.com" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          root = blog.packages.${system}.app;
-        };
-      };
-      "bookshelf.jrpotter.com" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          root = bookshelf.packages.${system}.app;
-        };
-      };
-    };
   };
 
   system.stateVersion = "23.11";
