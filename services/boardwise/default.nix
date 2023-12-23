@@ -1,4 +1,4 @@
-{ system, sops-nix, pkgs, lib, ... }:
+{ system, pkgs, lib, ... }:
 let
   boardwise = builtins.getFlake
     "github:boardwise-gg/website/db73e3b4f06659fd477be8e76594c01a185f1496";
