@@ -42,7 +42,7 @@
     };
   };
 
-  fonts.fonts = with pkgs; [ iosevka ];
+  fonts.packages = with pkgs; [ iosevka ];
 
   hardware.bluetooth.enable = true;
 
