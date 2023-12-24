@@ -16,7 +16,6 @@
         };
         repository = {
           DISABLE_DOWNLOAD_SOURCE_ARCHIVES = true;
-          DISABLE_MIGRATIONS = true;
           DISABLE_STARS = true;
         };
         other = {
@@ -25,9 +24,16 @@
         };
         server = {
           LANDING_PAGE = "/explore/repos";
+          ROOT_URL = "https://git.jrpotter.com";
         };
         service = {
           DISABLE_REGISTRATION = true;
+        };
+        "service.explore" = {
+          DISABLE_USERS_PAGE = true;
+        };
+        ui = {
+          SHOW_USER_EMAIL = false;
         };
         "ui.meta" = {
           AUTHOR = "Git • Joshua Potter";
