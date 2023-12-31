@@ -73,7 +73,8 @@
     };
   };
 
-  time.timeZone = "America/Denver";
+  # time.timeZone = "America/Denver";
+  time.timeZone = "America/New_York";
 
   virtualisation = {
     libvirtd.enable = true;
