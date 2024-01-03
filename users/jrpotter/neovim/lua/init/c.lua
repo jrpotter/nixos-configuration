@@ -13,8 +13,7 @@ function M.nvim_dap()
     },
   }
 
-  dap.configurations.c = dap.configurations.c or {}
-  table.insert(dap.configurations.c, {
+  local config = {
     name = 'Launch Executable',
     type = key,
     request = 'launch',
@@ -22,7 +21,13 @@ function M.nvim_dap()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
-  })
+  }
+
+  dap.configurations.c = dap.configurations.c or {}
+  table.insert(dap.configurations.c, config)
+
+  dap.configurations.cpp = dap.configurations.cpp or {}
+  table.insert(dap.configurations.cpp, config)
 end
 
 function M.nvim_lspconfig()
