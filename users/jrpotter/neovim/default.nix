@@ -27,6 +27,13 @@ let
     '';
   };
 
+  luasnip = {
+    plugin = pkgs.vimPlugins.luasnip;
+    config = ''
+      ${config.programs.neovim.nvim-snippets}
+    '';
+  };
+
   nvim-cmp = {
     plugin = pkgs.vimPlugins.nvim-cmp;
     config = ''
@@ -97,6 +104,16 @@ in
         Language-specific configurations for the `nvim-lspconfig` plugin.
       '';
     };
+
+    nvim-snippets = lib.mkOption {
+      type = lib.types.lines;
+      example = ''
+        require('...').nvim_lspconfig()
+      '';
+      description = lib.mdDoc ''
+        Language-specific configurations for the `luasnip` plugin.
+      '';
+    };
   };
 
   config = {
@@ -113,6 +130,7 @@ in
         } else p) [
         colorscheme  # Is always first.
         lualine
+        luasnip
         nvim-cmp
         nvim-dap
         nvim-lspconfig
@@ -121,7 +139,6 @@ in
         pkgs.vimPlugins.cmp-buffer
         pkgs.vimPlugins.cmp-nvim-lsp
         pkgs.vimPlugins.cmp_luasnip
-        pkgs.vimPlugins.luasnip
         pkgs.vimPlugins.nvim-web-devicons
         pkgs.vimPlugins.vim-prettier
       ];

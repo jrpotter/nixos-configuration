@@ -19,6 +19,10 @@
     nvim-lspconfig = ''
       require('python.init').nvim_lspconfig()
     '';
+
+    nvim-snippets = ''
+      require('luasnip').add_snippets('python', require('python.snippets'))
+    '';
   };
 
   xdg.configFile."nvim/after/ftplugin/python.lua".text = ''
