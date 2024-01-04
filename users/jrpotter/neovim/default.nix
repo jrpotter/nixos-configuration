@@ -30,6 +30,7 @@ let
   luasnip = {
     plugin = pkgs.vimPlugins.luasnip;
     config = ''
+      require('utils.luasnip').setup()
       ${config.programs.neovim.nvim-snippets}
     '';
   };

@@ -2,7 +2,7 @@ local M = {}
 
 local cmp = require('cmp')
 local cmp_buffer = require('cmp_buffer')
-local luasnip = require("luasnip")
+local luasnip = require('luasnip')
 
 function M.setup()
   cmp.setup {
@@ -12,9 +12,8 @@ function M.setup()
       end,
     },
     sources = {
-      {
-        name = 'nvim_lsp',
-      },
+      { name = 'luasnip' },
+      { name = 'nvim_lsp' },
       {
         name = 'buffer',
         option = {
@@ -31,29 +30,24 @@ function M.setup()
     },
     sorting = {
       comparators = {
-        function (...)
-          -- This also sorts completion results coming from other sources (e.g.
-          -- LSPs).
+        function(...)
+          -- This also sorts completion results coming from other sources.
           return cmp_buffer:compare_locality(...)
         end,
       },
     },
     mapping = {
-      ['<c-n>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then cmp.select_next_item() else fallback() end
-      end, { 'i', 's' }),
-
-      ['<c-p>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then cmp.select_prev_item() else fallback() end
+      ['<tab>'] = cmp.mapping(function(fallback)
+        if cmp.get_active_entry() then cmp.confirm() else fallback() end
       end, { 'i', 's' }),
 
       ['<c-l>'] = cmp.mapping(function(fallback)
         if cmp.visible() then cmp.abort() else fallback() end
       end, { 'i', 's' }),
 
-      ['<tab>'] = cmp.mapping(function(fallback)
-        if cmp.get_active_entry() then
-          cmp.confirm()
+      ['<c-n>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
         elseif luasnip.expand_or_locally_jumpable() then
           luasnip.expand_or_jump()
         else
@@ -61,8 +55,10 @@ function M.setup()
         end
       end, { 'i', 's' }),
 
-      ['<s-tab>'] = cmp.mapping(function(fallback)
-        if luasnip.jumpable(-1) then
+      ['<c-p>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.locally_jumpable(-1) then
           luasnip.jump(-1)
         else
           fallback()
