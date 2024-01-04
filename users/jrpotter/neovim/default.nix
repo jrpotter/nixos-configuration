@@ -18,8 +18,8 @@ let
         sections = {
           lualine_x = {'encoding', 'filetype'},
           lualine_y = {
-            require('init.statusline').get_active_lsp,
-            require('init.statusline').get_dap_status,
+            require('utils.statusline').get_active_lsp,
+            require('utils.statusline').get_dap_status,
           },
           lualine_z = {'%c:%l:%%%p'},
         },
@@ -30,7 +30,7 @@ let
   nvim-cmp = {
     plugin = pkgs.vimPlugins.nvim-cmp;
     config = ''
-      require('init.cmp').setup()
+      require('utils.cmp').setup()
     '';
   };
 
@@ -52,7 +52,7 @@ let
   nvim-telescope = {
     plugin = pkgs.vimPlugins.telescope-nvim;
     config = ''
-      require('init.telescope').setup()
+      require('utils.telescope').setup()
     '';
   };
 
@@ -72,7 +72,7 @@ let
       ]
     ));
     config = ''
-      require('init.treesitter').setup()
+      require('utils.treesitter').setup()
     '';
   };
 in
@@ -131,13 +131,13 @@ in
 
     xdg.configFile."nvim/init.lua".text =
       let
-        lua = import ./lua { inherit pkgs; };
+        config = import ./config { inherit pkgs; };
       in
         lib.mkMerge [
           # Extra Lua configuration to be prepended to `init.lua`. Extend the
           # Lua loader to search for our /nix/store/.../?.lua files.
           (lib.mkBefore ''
-            package.path = '${lua}/?.lua;' .. package.path
+            package.path = '${config}/?.lua;' .. package.path
           '')
           # Extra Lua configuration to be appended to `init.lua`.
           (lib.mkAfter ''

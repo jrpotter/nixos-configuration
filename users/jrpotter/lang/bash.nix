@@ -7,7 +7,7 @@
 
   programs.neovim = {
     nvim-lspconfig = ''
-      require('init.lsp').setup(require('lspconfig').bashls) {}
+      require('utils.lsp').setup(require('lspconfig').bashls) {}
     '';
   };
 }

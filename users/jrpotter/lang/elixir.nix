@@ -6,7 +6,7 @@
 
   programs.neovim = {
     nvim-lspconfig = ''
-      require('init.lsp').setup(require('lspconfig').elixirls) {
+      require('utils.lsp').setup(require('lspconfig').elixirls) {
         cmd = { 'elixir-ls' },
       }
     '';

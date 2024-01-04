@@ -15,11 +15,11 @@ in
 
   programs.neovim = {
     nvim-dap = ''
-      require('init.c').nvim_dap()
+      require('cxx.init').nvim_dap()
     '';
 
     nvim-lspconfig = ''
-      require('init.c').nvim_lspconfig()
+      require('cxx.init').nvim_lspconfig()
 
       vim.filetype.add({
         pattern = {
@@ -30,6 +30,6 @@ in
   };
 
   xdg.configFile."nvim/after/ftplugin/c.lua".text = ''
-    require('init.dap').buffer_map()
+    require('utils.dap').buffer_map()
   '';
 }

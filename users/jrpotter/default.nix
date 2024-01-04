@@ -8,7 +8,7 @@ in
     ./bash
     ./git.nix
     ./lang/bash.nix
-    ./lang/c.nix
+    ./lang/cxx.nix
     ./lang/elixir.nix
     ./lang/lean.nix
     ./lang/lua.nix

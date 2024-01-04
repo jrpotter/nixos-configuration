@@ -6,7 +6,7 @@
 
   programs.neovim = {
     nvim-lspconfig = ''
-      require('init.lua').nvim_lspconfig()
+      require('lua.init').nvim_lspconfig()
     '';
   };
 }

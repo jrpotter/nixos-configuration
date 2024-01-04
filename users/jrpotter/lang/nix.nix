@@ -6,7 +6,7 @@
 
   programs.neovim = {
     nvim-lspconfig = ''
-      require('init.lsp').setup(require('lspconfig').nil_ls) {}
+      require('utils.lsp').setup(require('lspconfig').nil_ls) {}
     '';
   };
 }

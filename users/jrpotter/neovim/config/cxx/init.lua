@@ -31,7 +31,7 @@ function M.nvim_dap()
 end
 
 function M.nvim_lspconfig()
-  require('init.lsp').setup(require('lspconfig').clangd) {}
+  require('utils.lsp').setup(require('lspconfig').clangd) {}
 end
 
 return M
