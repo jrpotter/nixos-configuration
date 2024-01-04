@@ -33,26 +33,22 @@ function M.setup()
     },
   }
 
-  vim.keymap.set(
-    { 'i', 's' },
-    '<c-e>',
-    function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(1)
-      end
-    end,
-    { silent = true }
-  )
-  vim.keymap.set(
-    { 'i', 's' },
-    '<c-y>',
-    function()
-      if luasnip.choice_active() then
-        luasnip.change_choice(-1)
-      end
-    end,
-    { silent = true }
-  )
+  vim.keymap.set({ 'i', 's' }, '<c-e>', function()
+    if luasnip.choice_active() then
+      return '<Plug>luasnip-next-choice'
+    else
+      return '<c-e>'
+    end
+  end, { silent = true, expr = true, remap = true })
+
+  vim.keymap.set({ 'i', 's' }, '<c-y>', function()
+    if luasnip.choice_active() then
+      return '<Plug>luasnip-prev-choice'
+    else
+      return '<c-y>'
+    end
+  end, { silent = true, expr = true, remap = true })
+
   -- Allow aborting the active snippet at any point in time.
   vim.keymap.set(
     { 'n', 'i', 's' },
