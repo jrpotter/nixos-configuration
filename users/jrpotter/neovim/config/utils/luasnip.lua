@@ -4,14 +4,18 @@ local luasnip = require('luasnip')
 local types = require('luasnip.util.types')
 
 function M.visual_isn(pos)
-  local f = luasnip.function_node
+  local d = luasnip.dynamic_node
+  local i = luasnip.insert_node
   local isn = luasnip.indent_snippet_node
+  local sn = luasnip.snippet_node
 
-  return isn(pos, {
-    f(function(_, parent)
-      return parent.snippet.env.LS_SELECT_DEDENT or {}
-    end)
-  }, '$PARENT_INDENT\t')
+  return isn(pos, d(1, function(_, parent)
+    local res, env = {}, parent.snippet.env
+    for _, ele in ipairs(env.LS_SELECT_DEDENT or {}) do
+      table.insert(res, ele)
+    end
+    return sn(nil, i(1, res))
+  end), '$PARENT_INDENT\t')
 end
 
 function M.choice_index(choice_node)
@@ -34,11 +38,14 @@ function M.setup()
           virt_text = { { '●', 'DiagnosticWarn' } },
         },
       },
+      [types.insertNode] = {
+        passive = {
+          hl_group = 'DiagnosticHint',
+        },
+      },
       [types.choiceNode] = {
         active = {
           virt_text = { { '⧨', 'DiagnosticHint' } },
-          -- Include in case one of our choice options is an empty string.
-          hl_group = 'DiagnosticOk',
         },
       },
     },
