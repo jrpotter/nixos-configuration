@@ -3,7 +3,7 @@ local M = {}
 local luasnip = require('luasnip')
 local types = require('luasnip.util.types')
 
-function M.visual_dynamic_node(pos)
+function M.visual_isn(pos)
   local f = luasnip.function_node
   local isn = luasnip.indent_snippet_node
 

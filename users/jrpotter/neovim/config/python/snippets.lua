@@ -18,10 +18,10 @@ for {} in {}:
     {}]],
       {
         c(1, {
-          i(nil, '_1'),
-          i(nil, '_2'),
-          i(nil, '_3'),
-          { i(1, '_4'), t(', '), i(2, '_5') },
+          i(nil, 'i'),
+          i(nil, 'k'),
+          i(nil, 'v'),
+          { i(1, 'k'), t(', '), i(2, 'v') },
         }),
         d(2, function(_, parent)
           local index = ul.choice_index(parent.nodes[2])
@@ -47,7 +47,7 @@ for {} in {}:
             })[index])
           )
         end, { 1 }),
-        ul.visual_dynamic_node(3),
+        ul.visual_isn(3),
       }
     )
   ),
