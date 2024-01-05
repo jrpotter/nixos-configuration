@@ -2,15 +2,28 @@ local M = {}
 
 local luasnip = require('luasnip')
 local types = require('luasnip.util.types')
-local f = require('luasnip').function_node
+local function_node = require('luasnip').function_node
 
-M.VISUAL = f(function(_, snip)
-  local res, env = {}, snip.env
+M.visual_node = function_node(function(_, snip)
+  local env = snip.env
+  if type(env.LS_SELECT_RAW) ~= 'table' then
+    return env.LS_SELECT_RAW
+  end
+  local res = {}
   for _, ele in ipairs(env.LS_SELECT_RAW) do
     table.insert(res, ele)
   end
   return res
 end, {})
+
+function M.choice_index(choice_node)
+  for i, c in ipairs(choice_node.choices) do
+    if c == choice_node.active_choice then
+      return i
+    end
+  end
+  return 1
+end
 
 function M.setup()
   luasnip.config.setup {

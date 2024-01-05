@@ -1,13 +1,14 @@
-local c = require('luasnip').choice_node
-local d = require('luasnip').dynamic_node
-local i = require('luasnip').insert_node
-local sn = require('luasnip').snippet_node
-local t = require('luasnip').text_node
-
-local s = require('luasnip').snippet
 local fmt = require('luasnip.extras.fmt').fmt
+local ls = require('luasnip')
+local ul = require('utils.luasnip')
 
-local VISUAL = require('utils.luasnip').VISUAL
+local c = ls.choice_node
+local d = ls.dynamic_node
+local i = ls.insert_node
+local r = ls.restore_node
+local s = ls.snippet
+local sn = ls.snippet_node
+local t = ls.text_node
 
 return {
   s(
@@ -17,41 +18,36 @@ for {} in {}:
     {}]],
       {
         c(1, {
-          i(1, 'i'),
-          i(2, 'k'),
-          i(3, 'v'),
-          sn(4, { i(1, 'k'), t(', '), i(2, 'v') }),
+          i(nil, '_1'),
+          i(nil, '_2'),
+          i(nil, '_3'),
+          { i(1, '_4'), t(', '), i(2, '_5') },
         }),
-        d(2, function(args, _, old_state)
-          local default = i(nil, 'val')
-          local snip = old_state or default
-
-          if args[1][1] == 'i' then
-            snip = sn(nil, c(1, {
-              { t('range('), i(1, 'n'), t(')') },
-              default,
-            }))
-          elseif args[1][1] == 'k' then
-            snip = sn(nil, c(1, {
-              { i(1, 'dict'), t('.keys()') },
-              default,
-            }))
-          elseif args[1][1] == 'v' then
-            snip = sn(nil, c(1, {
-              { i(1, 'dict'), t('.values()') },
-              default,
-            }))
-          elseif args[1][1] == 'k, v' then
-            snip = sn(nil, c(1, {
-              { i(1, 'dict'), t('.items()') },
-              default,
-            }))
-          end
-
-          snip.old_state = snip
-          return snip
+        d(2, function(_, parent)
+          local index = ul.choice_index(parent.nodes[2])
+          return sn(
+            nil,
+            r(1, string.format('for-%d', index), ({
+              c(nil, {
+                { t('range('), i(1, 'n'), t(')') },
+                i(nil, 'val'),
+              }),
+              c(nil, {
+                { i(1, 'dict'), t('.keys()') },
+                i(nil, 'val'),
+              }),
+              c(nil, {
+                { i(1, 'dict'), t('.values()') },
+                i(nil, 'val'),
+              }),
+              c(nil, {
+                { i(1, 'dict'), t('.items()') },
+                i(nil, 'val'),
+              }),
+            })[index])
+          )
         end, { 1 }),
-        VISUAL,
+        ul.visual_node,
       }
     )
   ),
