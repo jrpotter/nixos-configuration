@@ -47,7 +47,7 @@ for {} in {}:
             })[index])
           )
         end, { 1 }),
-        ul.visual_node,
+        ul.visual_dynamic_node(3),
       }
     )
   ),
