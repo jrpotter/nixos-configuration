@@ -38,11 +38,19 @@ function M.setup()
     },
     mapping = {
       ['<tab>'] = cmp.mapping(function(fallback)
-        if cmp.get_active_entry() then cmp.confirm() else fallback() end
+        if cmp.visible() then
+          cmp.confirm({ select = true })
+        else
+          fallback()
+        end
       end, { 'i', 's' }),
 
       ['<c-l>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then cmp.abort() else fallback() end
+        if cmp.visible() then
+          cmp.abort()
+        else
+          fallback()
+        end
       end, { 'i', 's' }),
 
       ['<c-n>'] = cmp.mapping(function(fallback)

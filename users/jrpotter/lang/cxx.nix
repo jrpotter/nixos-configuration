@@ -27,6 +27,11 @@ in
         },
       })
     '';
+
+    nvim-snippets = ''
+      require('luasnip').add_snippets('c', require('cxx.snippets'))
+      require('luasnip').add_snippets('cpp', require('cxx.snippets'))
+    '';
   };
 
   xdg.configFile."nvim/after/ftplugin/c.lua".text = ''

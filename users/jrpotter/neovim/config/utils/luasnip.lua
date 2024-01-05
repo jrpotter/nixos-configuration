@@ -40,11 +40,12 @@ function M.setup()
       },
       [types.insertNode] = {
         passive = {
-          hl_group = 'DiagnosticHint',
+          hl_group = 'DiagnosticVirtualTextWarn',
         },
       },
       [types.choiceNode] = {
         active = {
+          hl_group = 'DiagnosticVirtualTextHint',
           virt_text = { { '⧨', 'DiagnosticHint' } },
         },
       },
