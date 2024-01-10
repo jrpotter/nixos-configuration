@@ -1,7 +1,7 @@
 { system, pkgs, lib, ... }:
 let
   boardwise = builtins.getFlake
-    "github:boardwise-gg/website/db73e3b4f06659fd477be8e76594c01a185f1496";
+    "github:boardwise-gg/website/ef264d6670199157761602093f9bf52bb471c4b8";
   coach-scraper = builtins.getFlake
     "github:boardwise-gg/coach-scraper/58815d3ae5a69cac12436a01e77019a5ac5d16a7";
 in
