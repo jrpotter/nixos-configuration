@@ -36,7 +36,7 @@ in
       Environment = [
         "DATABASE_URL=ecto://postgres:postgres@localhost/boardwise"
       ];
-      EnvironmentFile = "/run/secrets/SECRET_KEY_BASE";
+      EnvironmentFile = "/run/secrets/BOARDWISE_SECRET_KEY_BASE";
       ExecStartPre = "${boardwise.packages.${system}.app}/bin/migrate";
       ExecStart = "${boardwise.packages.${system}.app}/bin/boardwise start";
       Restart = "on-failure";
@@ -49,6 +49,6 @@ in
 
   sops = {
     defaultSopsFile = ./secrets.yaml;
-    secrets.SECRET_KEY_BASE = {};
+    secrets.BOARDWISE_SECRET_KEY_BASE = {};
   };
 }
