@@ -12,7 +12,7 @@
         passwordFile = "/run/secrets/PLAUSIBLE_ADMIN_PWD";
       };
       server = {
-        baseUrl = "http://analytics.jrpotter.com";
+        baseUrl = "https://analytics.jrpotter.com";
         secretKeybaseFile = "/run/secrets/PLAUSIBLE_SECRET_KEY_BASE";
       };
     };
