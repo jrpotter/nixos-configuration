@@ -34,6 +34,7 @@
             framework = tapir.pkgs;
             deimos = tapir.pkgs;
             phobos = tapir.pkgs;
+            thebe = tapir.pkgs;
           };
           nodeSpecialArgs = {
             framework = {
@@ -44,6 +45,9 @@
             };
             phobos = {
               inherit (tapir) sops-nix;
+            };
+            thebe = {
+              inherit (tapir);
             };
           };
         };
@@ -62,6 +66,7 @@
 
         deimos.imports = [ ./hive/deimos ];
         phobos.imports = [ ./hive/phobos ];
+        thebe.imports = [ ./hive/thebe ];
       };
 
       packages.${system}.digital-ocean = {
