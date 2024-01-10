@@ -83,5 +83,9 @@ To do so, run:
 $ nix-shell -p ssh-to-age --run 'ssh-keyscan <host> | ssh-to-age'
 ```
 This will look for any SSH host ed25519 public keys and automatically run
-through `ssh-to-age`. Include an appropriately top-level `keys` entry in
-`.sops.yaml` before generating the secrets needed by the machine.
+through `ssh-to-age`. Include a new top-level `keys` entry in `.sops.yaml` so
+that newly created secrets file automatically apply the age keys. For existing
+secret files, rotate and add the new age key to them:
+```bash
+$ sops --in-place --rotate --add-age <value> <secrets-file>
+```

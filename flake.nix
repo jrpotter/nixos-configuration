@@ -47,7 +47,7 @@
               inherit (tapir) sops-nix;
             };
             thebe = {
-              inherit (tapir);
+              inherit (tapir) sops-nix;
             };
           };
         };
