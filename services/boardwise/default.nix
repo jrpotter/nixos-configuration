@@ -48,7 +48,8 @@ in
   ];
 
   sops = {
-    defaultSopsFile = ./secrets.yaml;
-    secrets.BOARDWISE_SECRET_KEY_BASE = {};
+    secrets.BOARDWISE_SECRET_KEY_BASE = {
+      sopsFile = ./secrets.yaml;
+    };
   };
 }

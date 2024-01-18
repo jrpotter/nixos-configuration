@@ -27,8 +27,11 @@
   };
 
   sops = {
-    defaultSopsFile = ./secrets.yaml;
-    secrets.PLAUSIBLE_ADMIN_PWD = {};
-    secrets.PLAUSIBLE_SECRET_KEY_BASE = {};
+    secrets.PLAUSIBLE_ADMIN_PWD = {
+      sopsFile = ./secrets.yaml;
+    };
+    secrets.PLAUSIBLE_SECRET_KEY_BASE = {
+      sopsFile = ./secrets.yaml;
+    };
   };
 }

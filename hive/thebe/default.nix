@@ -3,6 +3,8 @@
   imports = lib.optional (builtins.pathExists ./do-userdata.nix) ./do-userdata.nix ++ [
     sops-nix.nixosModules.sops
     ../../digital-ocean/configuration.nix
+    ../../services/boardwise
+    ../../services/forgejo.nix
     ../../services/plausible
   ];
 
