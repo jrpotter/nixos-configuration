@@ -1,7 +1,7 @@
 { system, pkgs, lib, ... }:
 let
   boardwise = builtins.getFlake
-    "github:boardwise-gg/website/ef264d6670199157761602093f9bf52bb471c4b8";
+    "github:boardwise-gg/website/0d5a66c604ba8c553d391c7461ff012d8b9c5393";
   coach-scraper = builtins.getFlake
     "github:boardwise-gg/coach-scraper/58815d3ae5a69cac12436a01e77019a5ac5d16a7";
 in
@@ -43,6 +43,16 @@ in
     };
   };
 
+  # We use this to seed our database. Run as follows:
+  # ```bash
+  # $ coach-scraper \
+  #     --host 127.0.0.1 \
+  #     --user postgres \
+  #     --dbname boardwise \
+  #     --user-agent <email> \
+  #     --site lichess \
+  #     --site chesscom
+  # ```
   environment.systemPackages = [
     coach-scraper.packages.${system}.app
   ];
