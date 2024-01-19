@@ -5,7 +5,6 @@
     ../../digital-ocean/configuration.nix
     ../../services/boardwise
     ../../services/forgejo.nix
-    ../../services/plausible
   ];
 
   deployment.targetHost = "64.23.168.148";
@@ -23,7 +22,6 @@
   services = {
     nginx.enable = true;
     openssh.enable = true;
-    plausible.enable = true;
     postgresql.enable = true;
   };
 
