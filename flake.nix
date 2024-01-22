@@ -33,6 +33,7 @@
           nodeNixpkgs = {
             framework = tapir.pkgs;
             deimos = tapir.pkgs;
+            phobos = tapir.pkgs;
             thebe = tapir.pkgs;
           };
           nodeSpecialArgs = {
@@ -41,6 +42,9 @@
             };
             deimos = {
               inherit (tapir) sops-nix;
+            };
+            phobos = {
+              inherit (tapir) home-manager;
             };
             thebe = {
               inherit (tapir) sops-nix;
@@ -61,6 +65,7 @@
         # Remote machines. Deploy using `colmena apply`
 
         deimos.imports = [ ./hive/deimos ];
+        phobos.imports = [ ./hive/phobos ];
         thebe.imports = [ ./hive/thebe ];
       };
 
