@@ -119,6 +119,7 @@ in
 
   config = {
     home.packages = with pkgs; [
+      par
       ripgrep
     ];
 
@@ -156,6 +157,7 @@ in
           # Lua loader to search for our /nix/store/.../?.lua files.
           (lib.mkBefore ''
             package.path = '${config}/?.lua;' .. package.path
+            require('utils.fmt').set_fmt_map()
           '')
           # Extra Lua configuration to be appended to `init.lua`.
           (lib.mkAfter ''
