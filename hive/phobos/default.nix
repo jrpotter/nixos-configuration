@@ -36,7 +36,16 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.jrpotter = import ../../users/jrpotter;
+    users.jrpotter = args@{ pkgs, lib, ... }:
+      let
+        base = import ../../users/jrpotter args;
+      in
+        lib.attrsets.updateManyAttrsByPath [
+          {
+            path = [ "home" "packages" ];
+            update = old: old ++ [ pkgs.wezterm ];
+          }
+        ] base;
 
     # Used to pass non-default parameters to submodules.
     extraSpecialArgs = {
