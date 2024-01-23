@@ -119,6 +119,9 @@
       xkbOptions = "ctrl:swapcaps";
     };
   };
+
+  time.timeZone = "America/Denver";
+
   users.users.jrpotter = {
     isNormalUser = true;
     extraGroups = [
@@ -128,8 +131,6 @@
       "wheel"
     ];
   };
-
-  time.timeZone = "America/Denver";
 
   virtualisation = {
     libvirtd.enable = true;
