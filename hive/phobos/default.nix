@@ -5,8 +5,6 @@
     home-manager.nixosModules.home-manager
   ];
 
-  deployment.targetHost = "144.126.218.252";
-
   environment = {
     systemPackages = with pkgs; [
       gcc
@@ -59,6 +57,10 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.mosh.enable = true;
+
+  # Our NixOS droplet's do not have a root password set. Disable so we can still
+  # run commands that require sudo (e.g. `colmena apply-local --sudo`).
+  security.sudo.wheelNeedsPassword = false;
 
   services.openssh.enable = true;
 

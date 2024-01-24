@@ -37,11 +37,11 @@
             thebe = tapir.pkgs;
           };
           nodeSpecialArgs = {
-            framework = {
-              inherit (tapir) home-manager;
-            };
             deimos = {
               inherit (tapir) sops-nix;
+            };
+            framework = {
+              inherit (tapir) home-manager;
             };
             phobos = {
               inherit (tapir) home-manager;
@@ -52,21 +52,37 @@
           };
         };
 
-        # Local machines. Deploy using `colmena apply-local [--sudo]`
+        deimos = {
+          imports = [ ./hive/deimos ];
+          deployment = {
+            allowLocalDeployment = false;
+            targetHost = "24.199.110.222";
+          };
+        };
 
         framework = {
           imports = [ ./hive/framework ];
           deployment = {
             allowLocalDeployment = true;
-            targetHost = null;  # Disable SSH deployment.
+            targetHost = null;
           };
         };
 
-        # Remote machines. Deploy using `colmena apply`
+        phobos = {
+          imports = [ ./hive/phobos ];
+          deployment = {
+            allowLocalDeployment = true;
+            targetHost = "144.126.218.252";
+          };
+        };
 
-        deimos.imports = [ ./hive/deimos ];
-        phobos.imports = [ ./hive/phobos ];
-        thebe.imports = [ ./hive/thebe ];
+        thebe = {
+          imports = [ ./hive/thebe ];
+          deployment = {
+            allowLocalDeployment = false;
+            targetHost = "64.23.168.148";
+          };
+        };
       };
 
       packages.${system}.digital-ocean = {

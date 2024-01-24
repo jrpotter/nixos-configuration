@@ -7,8 +7,6 @@
     ../../services/forgejo.nix
   ];
 
-  deployment.targetHost = "64.23.168.148";
-
   networking = {
     hostName = "thebe";
     firewall = {

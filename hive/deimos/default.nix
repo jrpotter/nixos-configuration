@@ -7,8 +7,6 @@
     ../../services/portfolio.nix
   ];
 
-  deployment.targetHost = "24.199.110.222";
-
   networking = {
     hostName = "deimos";
     firewall = {
