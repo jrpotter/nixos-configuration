@@ -31,6 +31,7 @@ let
     plugin = pkgs.vimPlugins.luasnip;
     config = ''
       require('utils.luasnip').setup()
+      require('luasnip').add_snippets('all', require('utf8.snippets'))
       ${config.programs.neovim.nvim-snippets}
     '';
   };

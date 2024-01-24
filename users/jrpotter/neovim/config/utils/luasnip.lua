@@ -32,6 +32,7 @@ function M.setup()
     region_check_events = 'InsertEnter',
     delete_check_events = 'InsertLeave',
     store_selection_keys = '<tab>',
+    enable_autosnippets = true,
     ext_opts = {
       [types.snippet] = {
         active = {
