@@ -157,4 +157,12 @@ return {
     { trig = [[cup]], wordTrig = false },
     t('∪')
   ),
+  s(
+    { trig = [[←eq]], wordTrig = false },
+    t('≤')
+  ),
+  s(
+    { trig = [[γeq]], wordTrig = false },
+    t('≥')
+  ),
 }
