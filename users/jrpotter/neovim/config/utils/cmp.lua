@@ -3,6 +3,7 @@ local M = {}
 local cmp = require('cmp')
 local cmp_buffer = require('cmp_buffer')
 local luasnip = require('luasnip')
+local types = require('cmp.types')
 
 function M.setup()
   cmp.setup {
@@ -30,6 +31,19 @@ function M.setup()
     },
     sorting = {
       comparators = {
+        -- Prioritize snippets over other sources.
+        function(entry1, entry2)
+          local kind1 = entry1:get_kind()
+          local kind2 = entry2:get_kind()
+          if kind1 ~= kind2 then
+            if kind1 == types.lsp.CompletionItemKind.Snippet then
+              return true
+            end
+            if kind2 == types.lsp.CompletionItemKind.Snippet then
+              return false
+            end
+          end
+        end,
         function(...)
           -- This also sorts completion results coming from other sources.
           return cmp_buffer:compare_locality(...)
