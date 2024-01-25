@@ -4,7 +4,69 @@ local s = ls.snippet
 local t = ls.text_node
 
 return {
+  -- Superscripts
+  s(
+    { trig = [[^+]], wordTrig = false },
+    t('⁺')
+  ),
+  s(
+    { trig = [[^-]], wordTrig = false },
+    t('⁻')
+  ),
+  s(
+    { trig = [[^0]], wordTrig = false },
+    t('⁰')
+  ),
+  s(
+    { trig = [[^1]], wordTrig = false },
+    t('¹')
+  ),
+  s(
+    { trig = [[^2]], wordTrig = false },
+    t('²')
+  ),
+  s(
+    { trig = [[^3]], wordTrig = false },
+    t('³')
+  ),
+  s(
+    { trig = [[^4]], wordTrig = false },
+    t('⁴')
+  ),
+  s(
+    { trig = [[^5]], wordTrig = false },
+    t('⁵')
+  ),
+  s(
+    { trig = [[^6]], wordTrig = false },
+    t('⁶')
+  ),
+  s(
+    { trig = [[^7]], wordTrig = false },
+    t('⁷')
+  ),
+  s(
+    { trig = [[^8]], wordTrig = false },
+    t('⁸')
+  ),
+  s(
+    { trig = [[^9]], wordTrig = false },
+    t('⁹')
+  ),
+
   -- Subscripts
+  s(
+    { trig = [[_+]], wordTrig = false },
+    t('₊')
+  ),
+  s(
+    { trig = [[_-]], wordTrig = false },
+    t('₋')
+  ),
+  s(
+    { trig = [[_0]], wordTrig = false },
+    t('₀')
+  ),
   s(
     { trig = [[_1]], wordTrig = false },
     t('₁')
