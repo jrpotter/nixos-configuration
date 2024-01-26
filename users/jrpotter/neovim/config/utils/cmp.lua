@@ -13,7 +13,7 @@ function M.setup()
       end,
     },
     sources = {
-      { name = 'luasnip' },
+      { name = 'luasnip', option = { show_autosnippets = true } },
       { name = 'nvim_lsp' },
       {
         name = 'buffer',

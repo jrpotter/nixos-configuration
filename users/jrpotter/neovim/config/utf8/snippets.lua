@@ -152,6 +152,10 @@ return {
     t('↔')
   ),
   s(
+    { trig = [[←r]], wordTrig = false },
+    t('↔')
+  ),
+  s(
     { trig = [[\r]], wordTrig = false },
     t('→')
   ),
@@ -192,11 +196,15 @@ return {
 
   -- Other operators
   s(
-    { trig = [[\neg]], wordTrig = false },
+    { trig = [[\not]], wordTrig = false },
     t('¬')
   ),
   s(
     { trig = [[\and]], wordTrig = false },
+    t('∧')
+  ),
+  s(
+    { trig = [[αnd]], wordTrig = false },
     t('∧')
   ),
   s(
@@ -224,7 +232,15 @@ return {
     t('≤')
   ),
   s(
+    { trig = [[←eq]], wordTrig = false },
+    t('≤')
+  ),
+  s(
     { trig = [[\geq]], wordTrig = false },
+    t('≥')
+  ),
+  s(
+    { trig = [[γeq]], wordTrig = false },
     t('≥')
   ),
   s(
@@ -235,5 +251,8 @@ return {
     { trig = [[\notin]], wordTrig = false },
     t('∉')
   ),
-
+  s(
+    { trig = [[¬in]], wordTrig = false },
+    t('∉')
+  ),
 }

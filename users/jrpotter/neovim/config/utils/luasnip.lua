@@ -75,11 +75,24 @@ function M.setup()
   end, { silent = true, expr = true, remap = true })
 
   -- Allow aborting the active snippet at any point in time.
-  vim.keymap.set(
-    { 'n', 'i', 's' },
-    '<c-l>',
-    '<cmd>LuaSnipUnlinkCurrent<cr>'
-  )
+  vim.keymap.set({ 'n', 'i', 's' }, '<c-l>', '<cmd>LuaSnipUnlinkCurrent<cr>')
+
+  -- Allow toggling autoexpansion on and off. This is more or less the intended
+  -- approach: https://github.com/L3MON4D3/LuaSnip/issues/832#issuecomment-1474993417
+  luasnip.expand_auto_on = true
+
+  local expand_auto = luasnip.expand_auto
+  local toggle_expand_auto = function()
+    if luasnip.expand_auto_on then
+      luasnip.expand_auto = function() end
+    else
+      luasnip.expand_auto = expand_auto
+    end
+    luasnip.expand_auto_on = not luasnip.expand_auto_on
+  end
+
+  toggle_expand_auto()
+  vim.keymap.set({ 'n', 'i', 's' }, '', toggle_expand_auto)
 end
 
 return M
