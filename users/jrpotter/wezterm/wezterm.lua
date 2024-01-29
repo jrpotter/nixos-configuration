@@ -115,4 +115,11 @@ return {
     mods = 'CTRL',
     timeout_milliseconds = 1500,
   },
+  ssh_domains = {
+    {
+      name = 'phobos',
+      remote_address = '144.126.218.252',
+      username = 'jrpotter',
+    },
+  },
 }
