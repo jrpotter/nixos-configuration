@@ -10,12 +10,33 @@ let
     fetchSubmodules = true;
   };
 
-  anki-connect = pkgs.fetchFromGitea {
-    domain = "git.foosoft.net";
-    owner = "alex";
-    repo = "anki-connect";
-    rev = "2996476e03a86ea56fd8148e9a434d6f65af890a";
-    hash = "sha256-5kwOZ6BLZqslBeOcX96GwLv3ME2J3czfw8oHG+ZgIQI=";
+  anki-connect = pkgs.stdenv.mkDerivation {
+    name = "anki-connect";
+    src = pkgs.fetchFromGitea {
+      domain = "git.foosoft.net";
+      owner = "alex";
+      repo = "anki-connect";
+      rev = "2996476e03a86ea56fd8148e9a434d6f65af890a";
+      hash = "sha256-5kwOZ6BLZqslBeOcX96GwLv3ME2J3czfw8oHG+ZgIQI=";
+    };
+
+    installPhase = ''
+      mkdir -p $out
+      cp -r ./plugin/* $out
+      cat <<EOF > $out/config.json
+      {
+        "apiKey": null,
+        "apiLogPath": null,
+        "webBindAddress": "127.0.0.1",
+        "webBindPort": 8765,
+        "webCorsOrigin": "http://localhost",
+        "webCorsOriginList": [
+          "http://localhost",
+          "app://obsidian.md"
+        ]
+      }
+      EOF
+    '';
   };
 
   image-occlusion-enhanced = pkgs.fetchFromGitHub {
@@ -54,7 +75,7 @@ in
     };
 
     "${addons 2055492159}".source =
-      "${anki-connect}/plugin";
+      anki-connect;
 
     "${addons 1374772155}".source =
       "${image-occlusion-enhanced}/src/image_occlusion_enhanced";
