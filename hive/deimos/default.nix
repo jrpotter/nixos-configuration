@@ -5,6 +5,7 @@
     ../../services/blog.nix
     ../../services/bookshelf.nix
     ../../services/portfolio.nix
+    ../../services/wiki.nix
   ];
 
   networking = {
