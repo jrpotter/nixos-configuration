@@ -54,33 +54,30 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.jrpotter = args@{ pkgs, lib, ... }:
-      let
-        base = import ../../users/jrpotter args // {
-          dconf.settings = {
-            "org/virt-manager/virt-manager/connections" = {
-              autoconnect = ["qemu:///system"];
-              uris = ["qemu:///system"];
-            };
-          };
+    users.jrpotter = { pkgs, ... }: {
+      imports = [
+        ../../users/jrpotter
+        ../../users/jrpotter/anki.nix
+      ];
+
+      dconf.settings = {
+        "org/virt-manager/virt-manager/connections" = {
+          autoconnect = ["qemu:///system"];
+          uris = ["qemu:///system"];
         };
-      in
-        lib.attrsets.updateManyAttrsByPath [
-          {
-            path = [ "home" "packages" ];
-            update = old: old ++ (with pkgs; [
-              anki-bin
-              bitwarden
-              chromium
-              firefox
-              gimp
-              virt-manager
-              vlc
-              wezterm
-              zotero
-            ]);
-          }
-        ] base;
+      };
+
+      home.packages = with pkgs; [
+        bitwarden
+        chromium
+        firefox
+        gimp
+        virt-manager
+        vlc
+        wezterm
+        zotero
+      ];
+    };
 
     # Used to pass non-default parameters to submodules.
     extraSpecialArgs = {
