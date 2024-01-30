@@ -1,4 +1,4 @@
-{ pkgs, system, home-manager, ... }:
+{ pkgs, lib, system, home-manager, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -72,6 +72,7 @@
         chromium
         firefox
         gimp
+        obsidian
         virt-manager
         vlc
         wezterm
@@ -92,6 +93,11 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "obsidian"
+    ];
 
   # virt-manager requires dconf to remember settings.
   programs.dconf.enable = true;
