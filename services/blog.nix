@@ -1,7 +1,7 @@
 { system, ... }:
 let
   blog = builtins.getFlake
-    "github:jrpotter/blog/47a8ec234cea73022ceba7b2a09f2e9e75e709ce";
+    "github:jrpotter/blog/457bfd6c521d5d8eeb41deb7d5d6a925fd55dda9";
 in
 {
   services.nginx.virtualHosts."blog.jrpotter.com" = {

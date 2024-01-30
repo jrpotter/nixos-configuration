@@ -1,7 +1,7 @@
 { system, ... }:
 let
   portfolio = builtins.getFlake
-    "github:jrpotter/portfolio/987e606455d37341ff7127bb396e10f017350e83";
+    "github:jrpotter/portfolio/f8ce67a38c73bf34f42056c3e32e138b3cdac8bb";
 in
 {
   services.nginx.virtualHosts."www.jrpotter.com" = {
