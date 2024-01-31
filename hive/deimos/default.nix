@@ -4,8 +4,8 @@
     ../../digital-ocean/configuration.nix
     ../../services/blog.nix
     ../../services/bookshelf.nix
+    ../../services/notebook.nix
     ../../services/portfolio.nix
-    ../../services/wiki.nix
   ];
 
   networking = {
