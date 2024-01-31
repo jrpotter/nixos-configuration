@@ -5,17 +5,14 @@ let
 
   linux = pkgs.fetchurl {
     url = "https://github.com/ankitects/anki/releases/download/${version}/anki-${version}-linux-qt6.tar.zst";
-    sha256 = "sha256-Kv0SH+bLnBSM/tYHe2kEJc4n7izZTBNWQs2nm/teLEU=";
+    sha256 = "sha256-bFtAUqSoFS8CWESiepWXywndkijATbWp6CJdqlQecuk=";
   };
 
   unpacked = pkgs.stdenv.mkDerivation {
     inherit pname version;
 
     nativeBuildInputs = [ pkgs.zstd ];
-    src = pkgs.fetchurl {
-      url = "https://github.com/ankitects/anki/releases/download/${version}/anki-${version}-linux-qt6.tar.zst";
-      sha256 = "sha256-Kv0SH+bLnBSM/tYHe2kEJc4n7izZTBNWQs2nm/teLEU=";
-    };
+    src = linux;
 
     installPhase = ''
       runHook preInstall

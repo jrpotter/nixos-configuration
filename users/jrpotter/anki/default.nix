@@ -60,15 +60,11 @@ let
   };
 in
 {
+  # When deleting a plugin also remove the generated folder at
+  # `$HOME/.local/share/Anki2/addons21`.
   xdg.dataFile = {
-    "${addons 2055492159}".source =
-      anki-connect;
-
-    "${addons 1374772155}".source =
-      "${image-occlusion-enhanced}/src/image_occlusion_enhanced";
-
-    "${addons 566351439}".source =
-      syntax-highlighting-ng;
+    "${addons 2055492159}".source = anki-connect;
+    "${addons 566351439}".source = syntax-highlighting-ng;
   };
 
   home.packages = [
