@@ -4,6 +4,7 @@ let
 
   anki-connect = pkgs.stdenv.mkDerivation {
     name = "anki-connect";
+
     src = pkgs.fetchFromGitea {
       domain = "git.foosoft.net";
       owner = "alex";
@@ -15,6 +16,18 @@ let
     installPhase = ''
       mkdir -p $out
       cp -r ./plugin/* $out
+
+      cat <<EOF > $out/meta.json
+      {
+        "name": "AnkiConnect",
+        "mod": 1705874601,
+        "min_point_version": 45,
+        "max_point_version": 45,
+        "branch_index": 1,
+        "disabled": false
+      }
+      EOF
+
       cat <<EOF > $out/config.json
       {
         "apiKey": null,
@@ -31,11 +44,35 @@ let
     '';
   };
 
-  image-occlusion-enhanced = pkgs.fetchFromGitHub {
-    owner = "glutanimate";
-    repo = "image-occlusion-enhanced";
-    rev = "33711026fbbfd0950fcfaee88ce776ab5e395f9b";
-    hash = "sha256-aSe9IzezhV3MGW/KGcul+Eesa5oQVwisVse5tjr8RQc=";
+  image-occlusion-enhanced = pkgs.stdenv.mkDerivation {
+    name = "image-occlusion-enhanced";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "glutanimate";
+      repo = "image-occlusion-enhanced";
+      rev = "33711026fbbfd0950fcfaee88ce776ab5e395f9b";
+      hash = "sha256-aSe9IzezhV3MGW/KGcul+Eesa5oQVwisVse5tjr8RQc=";
+    };
+
+    dontBuild = true;
+
+    installPhase = ''
+      mkdir -p $out
+      cp -r ./src/image_occlusion_enhanced/* $out
+
+      cat <<EOF > $out/meta.json
+      {
+        "homepage": "https://github.com/glutanimate/image-occlusion-enhanced",
+        "name": "Image Occlusion Enhanced",
+        "max_point_version": 50,
+        "mod": 1649488507,
+        "conflicts": ["image_occlusion_enhanced"],
+        "min_point_version": 50,
+        "branch_index": 1,
+        "disabled": false
+      }
+      EOF
+    '';
   };
 
   syntax-highlighting-ng = pkgs.stdenv.mkDerivation {
@@ -49,6 +86,20 @@ let
     installPhase = ''
       mkdir -p $out
       cp -r ./src/syntax_highlighting_ng/* $out
+
+      cat <<EOF > $out/meta.json
+      {
+        "mod": 1706379662,
+        "name": "Syntax Highlighting NG",
+        "homepage": "https://github.com/cav71/syntax-highlighting-ng",
+        "conflicts": ["566351439", "syntax_highlighting"],
+        "min_point_version": 49,
+        "max_point_version": 231001,
+        "branch_index": 0,
+        "disabled": false
+      }
+      EOF
+
       cat <<EOF > $out/config.json
       {
         "hotkey": "Alt+s",
@@ -63,11 +114,21 @@ in
   # When deleting a plugin also remove the generated folder at
   # `$HOME/.local/share/Anki2/addons21`.
   xdg.dataFile = {
-    "${addons 2055492159}".source = anki-connect;
-    "${addons 566351439}".source = syntax-highlighting-ng;
+    "${addons 2055492159}" = {
+      source = anki-connect;
+      recursive = true;
+    };
+    "${addons 1374772155}" = {
+      source = image-occlusion-enhanced;
+      recursive = true;
+    };
+    "${addons 566351439}" = {
+      source = syntax-highlighting-ng;
+      recursive = true;
+    };
   };
 
   home.packages = [
-    (import ./anki-bin.nix { inherit pkgs lib; })
+    (import ./bin.nix { inherit pkgs lib; })
   ];
 }
