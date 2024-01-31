@@ -57,7 +57,7 @@
     users.jrpotter = { pkgs, ... }: {
       imports = [
         ../../users/jrpotter
-        ../../users/jrpotter/anki.nix
+        ../../users/jrpotter/anki
       ];
 
       dconf.settings = {

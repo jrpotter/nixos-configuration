@@ -1,14 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   addons = id: "Anki2/addons21/${toString id}";
-
-  FlexibleGrading = pkgs.fetchFromGitHub {
-    owner = "jrpotter";
-    repo = "FlexibleGrading";
-    rev = "d9cd06bbb154a0740518e58e4619d3855e22c027";
-    hash = "sha256-ciIVFyt7TDBeC+h5feA5I17Ld1Pge/hRDqGMMcLTJiM=";
-    fetchSubmodules = true;
-  };
 
   anki-connect = pkgs.stdenv.mkDerivation {
     name = "anki-connect";
@@ -69,11 +61,6 @@ let
 in
 {
   xdg.dataFile = {
-    "${addons 1715096333}" = {
-      source = FlexibleGrading;
-      recursive = true;  # Let's addon write to directory.
-    };
-
     "${addons 2055492159}".source =
       anki-connect;
 
@@ -84,5 +71,7 @@ in
       syntax-highlighting-ng;
   };
 
-  home.packages = [ pkgs.anki-bin ];
+  home.packages = [
+    (import ./anki-bin.nix { inherit pkgs lib; })
+  ];
 }
