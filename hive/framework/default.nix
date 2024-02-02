@@ -76,7 +76,7 @@
         virt-manager
         vlc
         wezterm
-        zotero
+        (callPackage ../../users/jrpotter/zotero.nix {})
       ];
     };
 
