@@ -1,17 +1,26 @@
-{ pkgs, lib, commandLineArgs ? [] }:
+{ fetchurl
+, stdenv
+, lib
+, buildFHSEnv
+, appimageTools
+, writeShellScript
+, anki
+, zstd
+, commandLineArgs ? []
+}:
 let
   pname = "anki-bin";
   version = "23.12.1";
 
-  linux = pkgs.fetchurl {
+  linux = fetchurl {
     url = "https://github.com/ankitects/anki/releases/download/${version}/anki-${version}-linux-qt6.tar.zst";
     sha256 = "sha256-bFtAUqSoFS8CWESiepWXywndkijATbWp6CJdqlQecuk=";
   };
 
-  unpacked = pkgs.stdenv.mkDerivation {
+  unpacked = stdenv.mkDerivation {
     inherit pname version;
 
-    nativeBuildInputs = [ pkgs.zstd ];
+    nativeBuildInputs = [ zstd ];
     src = linux;
 
     installPhase = ''
@@ -28,12 +37,12 @@ let
   passthru.sources = { inherit linux; };
 
   meta = with lib; {
-    inherit (pkgs.anki.meta) license homepage description longDescription;
+    inherit (anki.meta) license homepage description longDescription;
     platforms = [ "x86_64-linux" ];
     maintainers = with maintainers; [ mahmoudk1000 ];
   };
 in
-  pkgs.buildFHSEnv (pkgs.appimageTools.defaultFhsEnvArgs // {
+  buildFHSEnv (appimageTools.defaultFhsEnvArgs // {
     inherit pname version;
     name = null;  # Appimage sets it to "appimage-env"
 
@@ -43,7 +52,7 @@ in
       krb5
     ]);
 
-    runScript = pkgs.writeShellScript "anki-wrapper.sh" ''
+    runScript = writeShellScript "anki-wrapper.sh" ''
       exec ${unpacked}/bin/anki ${ lib.strings.escapeShellArgs commandLineArgs } "$@"
     '';
 

@@ -129,6 +129,6 @@ in
   };
 
   home.packages = [
-    (import ./bin.nix { inherit pkgs lib; })
+    (pkgs.callPackage ./bin.nix {})
   ];
 }
