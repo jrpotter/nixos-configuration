@@ -4,7 +4,7 @@ let
 
   lean-nvim = {
     plugin = neovimUtils.pluginGit
-      "47ff75ce2fcc319fe7d8e031bc42a75473919b93"
+      "dd37e1d2e320fb8a0948bf6ca3f7703c98b80ecb"
       "Julian/lean.nvim";
     config = ''
       lua << EOF
