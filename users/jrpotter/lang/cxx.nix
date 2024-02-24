@@ -15,22 +15,16 @@ in
 
   programs.neovim = {
     nvim-dap = ''
-      require('cxx.init').nvim_dap()
+      require('lang.cxx').nvim_dap()
     '';
 
     nvim-lspconfig = ''
-      require('cxx.init').nvim_lspconfig()
-
+      require('lang.cxx').nvim_lspconfig()
       vim.filetype.add({
         pattern = {
           ['.*%.h'] = 'c',
         },
       })
-    '';
-
-    nvim-snippets = ''
-      require('luasnip').add_snippets('c', require('cxx.snippets'))
-      require('luasnip').add_snippets('cpp', require('cxx.snippets'))
     '';
   };
 

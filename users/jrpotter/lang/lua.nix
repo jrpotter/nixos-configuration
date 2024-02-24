@@ -6,11 +6,7 @@
 
   programs.neovim = {
     nvim-lspconfig = ''
-      require('lua.init').nvim_lspconfig()
-    '';
-
-    nvim-snippets = ''
-      require('luasnip').add_snippets('lua', require('lua.snippets'))
+      require('lang.lua').nvim_lspconfig()
     '';
   };
 }

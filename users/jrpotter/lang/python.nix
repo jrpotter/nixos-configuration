@@ -13,15 +13,11 @@
 
   programs.neovim = {
     nvim-dap = ''
-      require('python.init').nvim_dap()
+      require('lang.python').nvim_dap()
     '';
 
     nvim-lspconfig = ''
-      require('python.init').nvim_lspconfig()
-    '';
-
-    nvim-snippets = ''
-      require('luasnip').add_snippets('python', require('python.snippets'))
+      require('lang.python').nvim_lspconfig()
     '';
   };
 
