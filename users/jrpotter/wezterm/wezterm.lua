@@ -122,4 +122,5 @@ return {
       username = 'jrpotter',
     },
   },
+  warn_about_missing_glyphs = false,
 }
