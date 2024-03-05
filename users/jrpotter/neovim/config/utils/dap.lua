@@ -151,7 +151,7 @@ function M.buffer_map()
     local win_id = vim.fn.win_getid()
     vim.cmd.wincmd('b') -- Move to bottomright-most window.
     dap.repl.open({}, term_is_open() and
-      "vertical rightbelow split" or
+      string.format("vertical rightbelow %dsplit", height) or
       string.format("rightbelow %dsplit", height))
     vim.api.nvim_win_set_option(0, "winfixheight", true)
     vim.fn.win_gotoid(win_id)
@@ -165,7 +165,7 @@ function M.buffer_map()
     local win_id = vim.fn.win_getid()
     vim.cmd.wincmd('b') -- Move to bottomright-most window.
     vim.cmd(repl_is_open() and
-      "vertical rightbelow split" or
+      string.format("vertical rightbelow %dsplit", height) or
       string.format("rightbelow %dsplit", height))
     vim.api.nvim_win_set_option(0, "winfixheight", true)
     vim.api.nvim_win_set_buf(0, find_bufnr_by_pattern("^%[dap%-terminal]"))
