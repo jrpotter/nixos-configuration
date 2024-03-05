@@ -1,16 +1,16 @@
 local M = {}
 
-local dap = require('dap')
-local dap_ui = require('dap.ui')
-local dap_ui_widgets = require('dap.ui.widgets')
+local dap = require("dap")
+local dap_ui = require("dap.ui")
+local dap_ui_widgets = require("dap.ui.widgets")
 
 local function query_launch()
-  local command = vim.fn.input('Launch> ', vim.fn.getcwd() .. '/', 'file')
-  vim.api.nvim_echo({ { '', 'None' } }, false, {})
+  local command = vim.fn.input("Launch> ", vim.fn.getcwd() .. "/", "file")
+  vim.api.nvim_echo({ { "", "None" } }, false, {})
 
-  local parts = vim.split(command, '%s+', { trimempty = true })
+  local parts = vim.split(command, "%s+", { trimempty = true })
   if not parts[1] then
-    vim.api.nvim_err_writeln('Invalid command specification.')
+    vim.api.nvim_err_writeln("Invalid command specification.")
     return
   end
 
@@ -19,19 +19,19 @@ end
 
 -- Adaptation of https://github.com/mfussenegger/nvim-dap/blob/e154fdb6d70b3765d71f296e718b29d8b7026a63/lua/dap.lua#L413.
 local function select_config_and_run()
-  local filetype = vim.api.nvim_buf_get_option(0, 'filetype')
+  local filetype = vim.api.nvim_buf_get_option(0, "filetype")
   local configs = dap.configurations[filetype] or {}
   assert(
     vim.tbl_islist(configs),
     string.format(
-      '`dap.configurations.%s` must be a list of configurations, got %s',
+      "`dap.configurations.%s` must be a list of configurations, got %s",
       filetype,
       vim.inspect(configs)
     )
   )
   if not configs[1] then
-    local msg = 'No configuration found for `%s`. You need to add configs ' ..
-        'to `dap.configurations.%s` (See `:h dap-configuration`)'
+    local msg = "No configuration found for `%s`. You need to add configs " ..
+        "to `dap.configurations.%s` (See `:h dap-configuration`)"
     vim.api.nvim_err_writeln(string.format(msg, filetype, filetype))
     return
   end
@@ -41,17 +41,17 @@ local function select_config_and_run()
 
   dap_ui.pick_if_many(
     configs,
-    'Configuration: ',
+    "Configuration: ",
     function(c) -- Label function
       return c.name
     end,
     function(c) -- Callback
       if not c then
-        vim.api.nvim_err_writeln('No configuration selected.')
+        vim.api.nvim_err_writeln("No configuration selected.")
         return
       end
       local copy = vim.deepcopy(c)
-      if copy.request == 'launch' then
+      if copy.request == "launch" then
         local program, args = query_launch()
         copy.program = program
         copy.args = args
@@ -93,21 +93,21 @@ function M.buffer_map()
     else
       local win_id = vim.fn.win_getid()
       vim.cmd.wincmd('t') -- Move to topleft-most window.
-      vim.cmd(sidebar_any_open() and 'leftabove split' or 'vertical topleft split')
+      vim.cmd(sidebar_any_open() and "leftabove split" or "vertical topleft split")
       sidebar.open()
       vim.fn.win_gotoid(win_id)
       -- Update state of windows.
-      vim.api.nvim_win_set_option(sidebar.win, 'colorcolumn', '')
-      vim.api.nvim_win_set_option(sidebar.win, 'list', false)
-      vim.api.nvim_win_set_option(sidebar.win, 'wrap', false)
-      vim.api.nvim_win_set_option(sidebar.win, 'winfixwidth', true)
+      vim.api.nvim_win_set_option(sidebar.win, "colorcolumn", "")
+      vim.api.nvim_win_set_option(sidebar.win, "list", false)
+      vim.api.nvim_win_set_option(sidebar.win, "wrap", false)
+      vim.api.nvim_win_set_option(sidebar.win, "winfixwidth", true)
     end
   end
 
   local function sidebar_only(sidebar)
     for _, sb in pairs(sidebars) do
       if sb ~= sidebar and sidebar_is_open(sb) then
-        sb.close({ mode = 'toggle' })
+        sb.close({ mode = "toggle" })
       end
     end
     if not sidebar_is_open(sidebar) then
@@ -151,9 +151,9 @@ function M.buffer_map()
     local win_id = vim.fn.win_getid()
     vim.cmd.wincmd('b') -- Move to bottomright-most window.
     dap.repl.open({}, term_is_open() and
-      'vertical rightbelow split' or
-      string.format('rightbelow %dsplit', height))
-    vim.api.nvim_win_set_option(0, 'winfixheight', true)
+      "vertical rightbelow split" or
+      string.format("rightbelow %dsplit", height))
+    vim.api.nvim_win_set_option(0, "winfixheight", true)
     vim.fn.win_gotoid(win_id)
   end
 
@@ -165,9 +165,9 @@ function M.buffer_map()
     local win_id = vim.fn.win_getid()
     vim.cmd.wincmd('b') -- Move to bottomright-most window.
     vim.cmd(repl_is_open() and
-      'vertical rightbelow split' or
-      string.format('rightbelow %dsplit', height))
-    vim.api.nvim_win_set_option(0, 'winfixheight', true)
+      "vertical rightbelow split" or
+      string.format("rightbelow %dsplit", height))
+    vim.api.nvim_win_set_option(0, "winfixheight", true)
     vim.api.nvim_win_set_buf(0, find_bufnr_by_pattern("^%[dap%-terminal]"))
     vim.fn.win_gotoid(win_id)
   end
@@ -196,43 +196,43 @@ function M.buffer_map()
   end
 
   local function set_nnoremap(key, func)
-    local input = string.format('<localleader>%s', key)
-    vim.keymap.set('n', input, func, { buffer = true })
+    local input = string.format("<localleader>%s", key)
+    vim.keymap.set("n", input, func, { buffer = true })
   end
 
-  set_nnoremap('<localleader>', select_config_and_run)
-  set_nnoremap('b', dap.toggle_breakpoint)
-  set_nnoremap('c', function()
-    if dap.status() == '' then
-      vim.api.nvim_err_writeln('No active session.')
+  set_nnoremap("<localleader>", select_config_and_run)
+  set_nnoremap("b", dap.toggle_breakpoint)
+  set_nnoremap("c", function()
+    if dap.status() == "" then
+      vim.api.nvim_err_writeln("No active session.")
       return
     end
     dap.continue()
   end)
 
-  set_nnoremap('d', dap.down)
-  set_nnoremap('i', dap.step_into)
-  set_nnoremap('n', dap.step_over)
-  set_nnoremap('o', dap.step_out)
-  set_nnoremap('q', dap.close)
-  set_nnoremap('r', dap.run_to_cursor)
-  set_nnoremap('u', dap.up)
-  set_nnoremap('x', dap.clear_breakpoints)
+  set_nnoremap("d", dap.down)
+  set_nnoremap("i", dap.step_into)
+  set_nnoremap("n", dap.step_over)
+  set_nnoremap("o", dap.step_out)
+  set_nnoremap("q", dap.close)
+  set_nnoremap("r", dap.run_to_cursor)
+  set_nnoremap("u", dap.up)
+  set_nnoremap("x", dap.clear_breakpoints)
 
-  set_nnoremap('wf', function() sidebar_toggle(sidebars.frames) end)
-  set_nnoremap('wh', function() sidebar_toggle(sidebars.threads) end)
-  set_nnoremap('wr', function() repl_toggle({ height = 10 }) end)
-  set_nnoremap('ws', function() sidebar_toggle(sidebars.scopes) end)
-  set_nnoremap('wt', function() term_toggle({ height = 10 }) end)
+  set_nnoremap("wf", function() sidebar_toggle(sidebars.frames) end)
+  set_nnoremap("wh", function() sidebar_toggle(sidebars.threads) end)
+  set_nnoremap("wr", function() repl_toggle({ height = 10 }) end)
+  set_nnoremap("ws", function() sidebar_toggle(sidebars.scopes) end)
+  set_nnoremap("wt", function() term_toggle({ height = 10 }) end)
 
-  set_nnoremap('wF', function() sidebar_only(sidebars.frames) end)
-  set_nnoremap('wH', function() sidebar_only(sidebars.threads) end)
-  set_nnoremap('wR', function()
+  set_nnoremap("wF", function() sidebar_only(sidebars.frames) end)
+  set_nnoremap("wH", function() sidebar_only(sidebars.threads) end)
+  set_nnoremap("wR", function()
     term_close()
     repl_open({ height = 10 })
   end)
-  set_nnoremap('wS', function() sidebar_only(sidebars.scopes) end)
-  set_nnoremap('wT', function()
+  set_nnoremap("wS", function() sidebar_only(sidebars.scopes) end)
+  set_nnoremap("wT", function()
     repl_close()
     term_open({ height = 10 })
   end)

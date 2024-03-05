@@ -1,26 +1,26 @@
 local M = {}
 
 function M.nvim_dap()
-  local dap = require('dap')
-  local key = 'codelldb'
+  local dap = require("dap")
+  local key = "codelldb"
 
   dap.adapters[key] = {
-    type = 'server',
-    port = '${port}',
+    type = "server",
+    port = "${port}",
     executable = {
-      command = 'codelldb',
-      args = {'--port', '${port}'},
+      command = "codelldb",
+      args = { "--port", "${port}" },
     },
   }
 
   local config = {
-    name = 'Launch Executable',
+    name = "Launch Executable",
     type = key,
-    request = 'launch',
+    request = "launch",
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+      return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
     end,
-    cwd = '${workspaceFolder}',
+    cwd = "${workspaceFolder}",
   }
 
   dap.configurations.c = dap.configurations.c or {}
@@ -31,7 +31,7 @@ function M.nvim_dap()
 end
 
 function M.nvim_lspconfig()
-  require('utils.lsp').setup(require('lspconfig').clangd) {}
+  require("utils.lsp").setup(require("lspconfig").clangd) {}
 end
 
 return M

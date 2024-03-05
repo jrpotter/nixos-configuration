@@ -1,22 +1,22 @@
 local M = {}
 
-local cmp = require('cmp')
-local cmp_buffer = require('cmp_buffer')
-local luasnip = require('luasnip')
-local types = require('cmp.types')
+local cmp = require("cmp")
+local cmp_buffer = require("cmp_buffer")
+local luasnip = require("luasnip")
+local types = require("cmp.types")
 
 function M.setup()
   cmp.setup {
     snippet = {
       expand = function(args)
-        require('luasnip').lsp_expand(args.body)
+        require("luasnip").lsp_expand(args.body)
       end,
     },
     sources = {
-      { name = 'luasnip', option = { show_autosnippets = true } },
-      { name = 'nvim_lsp' },
+      { name = "luasnip", option = { show_autosnippets = true } },
+      { name = "nvim_lsp" },
       {
-        name = 'buffer',
+        name = "buffer",
         option = {
           -- Complete only on visible buffers.
           get_bufnrs = function()
@@ -51,23 +51,23 @@ function M.setup()
       },
     },
     mapping = {
-      ['<tab>'] = cmp.mapping(function(fallback)
+      ["<tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.confirm({ select = true })
         else
           fallback()
         end
-      end, { 'i', 's' }),
+      end, { "i", "s" }),
 
-      ['<c-l>'] = cmp.mapping(function(fallback)
+      ["<c-l>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.abort()
         else
           fallback()
         end
-      end, { 'i', 's' }),
+      end, { "i", "s" }),
 
-      ['<c-n>'] = cmp.mapping(function(fallback)
+      ["<c-n>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_locally_jumpable() then
@@ -75,9 +75,9 @@ function M.setup()
         else
           fallback()
         end
-      end, { 'i', 's' }),
+      end, { "i", "s" }),
 
-      ['<c-p>'] = cmp.mapping(function(fallback)
+      ["<c-p>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.locally_jumpable(-1) then
@@ -85,7 +85,7 @@ function M.setup()
         else
           fallback()
         end
-      end, { 'i', 's' }),
+      end, { "i", "s" }),
     },
   }
 end

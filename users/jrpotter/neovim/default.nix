@@ -7,22 +7,22 @@ let
       "eb82712f86319272f4b7b9dbb4ec6df650e6987f"
       "EdenEast/nightfox.nvim";
     config = ''
-      vim.cmd('colorscheme nordfox')
+      vim.cmd("colorscheme nordfox")
     '';
   };
 
   lualine = {
     plugin = pkgs.vimPlugins.lualine-nvim;
     config = ''
-      require('lualine').setup {
+      require("lualine").setup {
         sections = {
-          lualine_x = {'encoding', 'filetype'},
+          lualine_x = { "encoding", "filetype" },
           lualine_y = {
-            require('utils.statusline').get_active_lsp,
-            require('utils.statusline').get_dap_status,
-            require('utils.statusline').get_autoexpand_status,
+            require("utils.statusline").get_active_lsp,
+            require("utils.statusline").get_dap_status,
+            require("utils.statusline").get_autoexpand_status,
           },
-          lualine_z = {'%c:%l:%%%p'},
+          lualine_z = { "%c:%l:%%%p" },
         },
       }
     '';
@@ -31,8 +31,8 @@ let
   luasnip = {
     plugin = pkgs.vimPlugins.luasnip;
     config = ''
-      require('utils.luasnip').setup()
-      require('luasnip').add_snippets('all', require('utils.utf8'), {
+      require("utils.luasnip").setup()
+      require("luasnip").add_snippets("all", require("utils.utf8"), {
         type = "autosnippets",
       })
     '';
@@ -41,7 +41,7 @@ let
   nvim-cmp = {
     plugin = pkgs.vimPlugins.nvim-cmp;
     config = ''
-      require('utils.cmp').setup()
+      require("utils.cmp").setup()
     '';
   };
 
@@ -68,7 +68,7 @@ let
   nvim-telescope = {
     plugin = pkgs.vimPlugins.telescope-nvim;
     config = ''
-      require('utils.telescope').setup()
+      require("utils.telescope").setup()
     '';
   };
 
@@ -88,7 +88,7 @@ let
       ]
     ));
     config = ''
-      require('utils.treesitter').setup()
+      require("utils.treesitter").setup()
     '';
   };
 in
@@ -97,7 +97,7 @@ in
     nvim-dap = lib.mkOption {
       type = lib.types.lines;
       example = ''
-        require('...').nvim_dap()
+        require("...").nvim_dap()
       '';
       description = lib.mdDoc ''
         Language-specific configurations for the `nvim-dap` plugin.
@@ -107,7 +107,7 @@ in
     nvim-lspconfig = lib.mkOption {
       type = lib.types.lines;
       example = ''
-        require('...').nvim_lspconfig()
+        require("...").nvim_lspconfig()
       '';
       description = lib.mdDoc ''
         Language-specific configurations for the `nvim-lspconfig` plugin.
@@ -153,18 +153,18 @@ in
           # Extra Lua configuration to be prepended to `init.lua`. Extend the
           # Lua loader to search for our /nix/store/.../?.lua files.
           (lib.mkBefore ''
-            package.path = '${config}/?.lua;' .. package.path
+            package.path = "${config}/?.lua;" .. package.path
           '')
           # Extra Lua configuration to be appended to `init.lua`.
           (lib.mkAfter ''
-            vim.g.mapleader = ' '
-            vim.g.maplocalleader = '\\'
-            vim.o.colorcolumn = '80,100'
-            vim.o.equalalways = false -- Disable auto window resize.
-            vim.o.expandtab = true    -- Spaces instead of tabs.
-            vim.o.list = true         -- Show hidden characters.
-            vim.o.shiftwidth = 2      -- # of spaces to use for each (auto)indent.
-            vim.o.tabstop = 2         -- # of spaces a <Tab> in the file counts for.
+            vim.g.mapleader = " "
+            vim.g.maplocalleader = "\\"
+            vim.o.colorcolumn = "80,100"
+            vim.o.equalalways = false  -- Disable auto window resize.
+            vim.o.expandtab = true     -- Spaces instead of tabs.
+            vim.o.list = true          -- Show hidden characters.
+            vim.o.shiftwidth = 2       -- # of spaces to use for each (auto)indent.
+            vim.o.tabstop = 2          -- # of spaces a <Tab> in the file counts for.
           '')
         ];
   };

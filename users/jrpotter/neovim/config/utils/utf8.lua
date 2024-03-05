@@ -7,201 +7,201 @@ return {
   -- Superscripts
   s(
     { trig = [[\^+]], wordTrig = false },
-    t('⁺')
+    t("⁺")
   ),
   s(
     { trig = [[\^-]], wordTrig = false },
-    t('⁻')
+    t("⁻")
   ),
   s(
     { trig = [[\^0]], wordTrig = false },
-    t('⁰')
+    t("⁰")
   ),
   s(
     { trig = [[\^1]], wordTrig = false },
-    t('¹')
+    t("¹")
   ),
   s(
     { trig = [[\^2]], wordTrig = false },
-    t('²')
+    t("²")
   ),
   s(
     { trig = [[\^3]], wordTrig = false },
-    t('³')
+    t("³")
   ),
   s(
     { trig = [[\^4]], wordTrig = false },
-    t('⁴')
+    t("⁴")
   ),
   s(
     { trig = [[\^5]], wordTrig = false },
-    t('⁵')
+    t("⁵")
   ),
   s(
     { trig = [[\^6]], wordTrig = false },
-    t('⁶')
+    t("⁶")
   ),
   s(
     { trig = [[\^7]], wordTrig = false },
-    t('⁷')
+    t("⁷")
   ),
   s(
     { trig = [[\^8]], wordTrig = false },
-    t('⁸')
+    t("⁸")
   ),
   s(
     { trig = [[\^9]], wordTrig = false },
-    t('⁹')
+    t("⁹")
   ),
 
   -- Subscripts
   s(
     { trig = [[\_+]], wordTrig = false },
-    t('₊')
+    t("₊")
   ),
   s(
     { trig = [[\_-]], wordTrig = false },
-    t('₋')
+    t("₋")
   ),
   s(
     { trig = [[\_0]], wordTrig = false },
-    t('₀')
+    t("₀")
   ),
   s(
     { trig = [[\_1]], wordTrig = false },
-    t('₁')
+    t("₁")
   ),
   s(
     { trig = [[\_2]], wordTrig = false },
-    t('₂')
+    t("₂")
   ),
   s(
     { trig = [[\_3]], wordTrig = false },
-    t('₃')
+    t("₃")
   ),
   s(
     { trig = [[\_4]], wordTrig = false },
-    t('₄')
+    t("₄")
   ),
   s(
     { trig = [[\_5]], wordTrig = false },
-    t('₅')
+    t("₅")
   ),
   s(
     { trig = [[\_6]], wordTrig = false },
-    t('₆')
+    t("₆")
   ),
   s(
     { trig = [[\_7]], wordTrig = false },
-    t('₇')
+    t("₇")
   ),
   s(
     { trig = [[\_8]], wordTrig = false },
-    t('₈')
+    t("₈")
   ),
   s(
     { trig = [[\_9]], wordTrig = false },
-    t('₉')
+    t("₉")
   ),
   s(
     { trig = [[\_a]], wordTrig = false },
-    t('ₐ')
+    t("ₐ")
   ),
   s(
     { trig = [[\_i]], wordTrig = false },
-    t('ᵢ')
+    t("ᵢ")
   ),
   s(
     { trig = [[\_j]], wordTrig = false },
-    t('ⱼ')
+    t("ⱼ")
   ),
   s(
     { trig = [[\_k]], wordTrig = false },
-    t('ₖ')
+    t("ₖ")
   ),
   s(
     { trig = [[\_m]], wordTrig = false },
-    t('ₘ')
+    t("ₘ")
   ),
   s(
     { trig = [[\_n]], wordTrig = false },
-    t('ₙ')
+    t("ₙ")
   ),
 
   -- Lists
   s(
     { trig = [[\.]], wordTrig = false },
-    t('·')
+    t("·")
   ),
   s(
     { trig = [[\circ]], wordTrig = false },
-    t('∘')
+    t("∘")
   ),
 
   -- Arrows
   s(
     { trig = [[\d]], wordTrig = false },
-    t('↓')
+    t("↓")
   ),
   s(
     { trig = [[\l]], wordTrig = false },
-    t('←')
+    t("←")
   ),
   s(
     { trig = [[\lr]], wordTrig = false },
-    t('↔')
+    t("↔")
   ),
   s(
     { trig = [[←r]], wordTrig = false },
-    t('↔')
+    t("↔")
   ),
   s(
     { trig = [[\r]], wordTrig = false },
-    t('→')
+    t("→")
   ),
   s(
     { trig = [[\u]], wordTrig = false },
-    t('↑')
+    t("↑")
   ),
 
   -- Greek letters
   s(
     { trig = [[\a]], wordTrig = false },
-    t('α')
+    t("α")
   ),
   s(
     { trig = [[\b]], wordTrig = false },
-    t('β')
+    t("β")
   ),
   s(
     { trig = [[\g]], wordTrig = false },
-    t('γ')
+    t("γ")
   ),
   s(
     { trig = [[\e]], wordTrig = false },
-    t('ε')
+    t("ε")
   ),
   s(
     { trig = [[\pi]], wordTrig = false },
-    t('π')
+    t("π")
   ),
   s(
     { trig = [[\s]], wordTrig = false },
-    t('σ')
+    t("σ")
   ),
   s(
     { trig = [[\z]], wordTrig = false },
-    t('ζ')
+    t("ζ")
   ),
 
   -- Other operators
   s(
     { trig = [[\not]], wordTrig = false },
-    t('¬')
+    t("¬")
   ),
   s(
     { trig = [[\and]], wordTrig = false },
-    t('∧')
+    t("∧")
   ),
   s(
     { trig = [[αnd]], wordTrig = false },
@@ -209,50 +209,50 @@ return {
   ),
   s(
     { trig = [[\or]], wordTrig = false },
-    t('∨')
+    t("∨")
   ),
   s(
     { trig = [[\iff]], wordTrig = false },
-    t('⇔')
+    t("⇔")
   ),
   s(
     { trig = [[\imp]], wordTrig = false },
-    t('⇒')
+    t("⇒")
   ),
   s(
     { trig = [[\cap]], wordTrig = false },
-    t('∩')
+    t("∩")
   ),
   s(
     { trig = [[\cup]], wordTrig = false },
-    t('∪')
+    t("∪")
   ),
   s(
     { trig = [[\leq]], wordTrig = false },
-    t('≤')
+    t("≤")
   ),
   s(
     { trig = [[←eq]], wordTrig = false },
-    t('≤')
+    t("≤")
   ),
   s(
     { trig = [[\geq]], wordTrig = false },
-    t('≥')
+    t("≥")
   ),
   s(
     { trig = [[γeq]], wordTrig = false },
-    t('≥')
+    t("≥")
   ),
   s(
     { trig = [[\in]], wordTrig = false },
-    t('∈')
+    t("∈")
   ),
   s(
     { trig = [[\notin]], wordTrig = false },
-    t('∉')
+    t("∉")
   ),
   s(
     { trig = [[¬in]], wordTrig = false },
-    t('∉')
+    t("∉")
   ),
 }

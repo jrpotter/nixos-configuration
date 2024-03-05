@@ -1,7 +1,7 @@
 local M = {}
 
-local luasnip = require('luasnip')
-local types = require('luasnip.util.types')
+local luasnip = require("luasnip")
+local types = require("luasnip.util.types")
 
 function M.visual_isn(pos)
   local d = luasnip.dynamic_node
@@ -15,7 +15,7 @@ function M.visual_isn(pos)
       table.insert(res, ele)
     end
     return sn(nil, i(1, res))
-  end), '$PARENT_INDENT\t')
+  end), "$PARENT_INDENT\t")
 end
 
 function M.choice_index(choice_node)
@@ -29,53 +29,53 @@ end
 
 function M.setup()
   luasnip.config.setup {
-    region_check_events = 'InsertEnter',
-    delete_check_events = 'InsertLeave',
-    store_selection_keys = '<tab>',
+    region_check_events = "InsertEnter",
+    delete_check_events = "InsertLeave",
+    store_selection_keys = "<tab>",
     enable_autosnippets = true,
     ext_opts = {
       [types.snippet] = {
         active = {
-          virt_text = { { '●', 'DiagnosticWarn' } },
+          virt_text = { { "●", "DiagnosticWarn" } },
         },
       },
       [types.insertNode] = {
         passive = {
-          hl_group = 'DiagnosticVirtualTextWarn',
+          hl_group = "DiagnosticVirtualTextWarn",
         },
       },
       [types.choiceNode] = {
         active = {
-          hl_group = 'DiagnosticVirtualTextHint',
-          virt_text = { { '⧨', 'DiagnosticHint' } },
+          hl_group = "DiagnosticVirtualTextHint",
+          virt_text = { { "⧨", "DiagnosticHint" } },
         },
       },
     },
   }
 
   -- Track where we are expanding the snippet.
-  luasnip.env_namespace('INFO', {
+  luasnip.env_namespace("INFO", {
     init = function(info) return { POS = info.pos } end,
   })
 
-  vim.keymap.set({ 'i', 's' }, '<c-e>', function()
+  vim.keymap.set({ "i", "s" }, "<c-e>", function()
     if luasnip.choice_active() then
-      return '<Plug>luasnip-next-choice'
+      return "<Plug>luasnip-next-choice"
     else
-      return '<c-e>'
+      return "<c-e>"
     end
   end, { silent = true, expr = true, remap = true })
 
-  vim.keymap.set({ 'i', 's' }, '<c-y>', function()
+  vim.keymap.set({ "i", "s" }, "<c-y>", function()
     if luasnip.choice_active() then
-      return '<Plug>luasnip-prev-choice'
+      return "<Plug>luasnip-prev-choice"
     else
-      return '<c-y>'
+      return "<c-y>"
     end
   end, { silent = true, expr = true, remap = true })
 
   -- Allow aborting the active snippet at any point in time.
-  vim.keymap.set({ 'n', 'i', 's' }, '<c-l>', '<cmd>LuaSnipUnlinkCurrent<cr>')
+  vim.keymap.set({ "n", "i", "s" }, "<c-l>", "<cmd>LuaSnipUnlinkCurrent<cr>")
 
   -- Allow toggling autoexpansion on and off. This is more or less the intended
   -- approach: https://github.com/L3MON4D3/LuaSnip/issues/832#issuecomment-1474993417
@@ -92,7 +92,7 @@ function M.setup()
   end
 
   toggle_expand_auto()
-  vim.keymap.set({ 'n', 'i', 's' }, '', toggle_expand_auto)
+  vim.keymap.set({ "n", "i", "s" }, "", toggle_expand_auto)
 end
 
 return M
