@@ -47,10 +47,15 @@ let
 
   nvim-dap = {
     plugin = utils.pluginGit
-      "e154fdb6d70b3765d71f296e718b29d8b7026a63"
+      "fc880e82059eb21c0fa896be60146e5f17680648"
       "mfussenegger/nvim-dap";
     config = ''
-      require('dap').defaults.fallback.terminal_win_cmd = 'below 10split new'
+      require("dap").defaults.fallback.terminal_win_cmd = function()
+        return vim.api.nvim_create_buf(
+          true,  -- listed
+          true   -- scratch
+        )
+      end
       ${config.programs.neovim.nvim-dap}
     '';
   };
