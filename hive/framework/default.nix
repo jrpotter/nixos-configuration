@@ -123,8 +123,8 @@
     };
   };
 
-  # time.timeZone = "America/Denver";
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Denver";
+  # time.timeZone = "America/New_York";
 
   users.users.jrpotter = {
     isNormalUser = true;

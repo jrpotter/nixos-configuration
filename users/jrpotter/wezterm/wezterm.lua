@@ -4,6 +4,7 @@ return {
   check_for_updates = false,
   color_scheme = "nordfox",
   font = wezterm.font "Iosevka",
+  hide_mouse_cursor_when_typing = false,
   keys = {
     {
       key = " ",
