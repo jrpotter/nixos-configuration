@@ -168,6 +168,8 @@ in
 
             -- "Zoom" in on a window
             vim.keymap.set("n", "<c-w>z", ":tabedit %<CR>")
+            -- Open working directory.
+            vim.keymap.set("n", "-", ":Explore<CR>")
           '')
         ];
   };
