@@ -165,6 +165,9 @@ in
             vim.o.list = true          -- Show hidden characters.
             vim.o.shiftwidth = 2       -- # of spaces to use for each (auto)indent.
             vim.o.tabstop = 2          -- # of spaces a <Tab> in the file counts for.
+
+            -- "Zoom" in on a window
+            vim.keymap.set("n", "<c-w>z", ":tabedit %<CR>")
           '')
         ];
   };
