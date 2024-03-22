@@ -1,7 +1,7 @@
 { system, ... }:
 let
   notebook = builtins.getFlake
-    "github:jrpotter/notebook/444418d78e275a435031d1995ded85cd477c1526";
+    "github:jrpotter/notebook/4b65764c8973f54b82a0192aef19391fc61e1fef";
 in
 {
   services.nginx.virtualHosts."notebook.jrpotter.com" = {
