@@ -1,7 +1,7 @@
 { system, pkgs, lib, ... }:
 let
   reconn = (
-    builtins.getFlake "git+ssh://forgejo@git.jrpotter.com/r/reconn?rev=0657541aa62f9b7a672c239f92eb3b410a3dd1ce"
+    builtins.getFlake "git+ssh://forgejo@git.jrpotter.com/r/reconn?rev=42376b2060d00856ed3ea3e9ef9177ef6c7bca80"
   ).packages.${system}.app;
 in
 {
@@ -40,6 +40,7 @@ in
     after = [ "network.target" "postgresql.service" ];
     requires = [ "network-online.target" "postgresql.service" ];
     environment = {
+      PHX_HOST = "hideandseek.live";
       DATABASE_URL = "ecto://postgres:postgres@localhost/reconn";
     };
     serviceConfig = {
