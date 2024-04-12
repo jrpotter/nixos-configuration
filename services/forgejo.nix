@@ -41,12 +41,18 @@
         };
       };
     };
-    nginx.virtualHosts."git.jrpotter.com" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:3000";
+    nginx = {
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+
+      virtualHosts."git.jrpotter.com" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3000";
+        };
       };
     };
   };

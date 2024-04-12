@@ -9,13 +9,19 @@ let
 in
 {
   services = {
-    nginx.virtualHosts."www.boardwise.gg" = {
-      forceSSL = true;
-      enableACME = true;
-      serverAliases = [ "boardwise.gg" ];
-      locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:4000";
+    nginx = {
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+
+      virtualHosts."www.boardwise.gg" = {
+        forceSSL = true;
+        enableACME = true;
+        serverAliases = [ "boardwise.gg" ];
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:4000";
+        };
       };
     };
     postgresql = {

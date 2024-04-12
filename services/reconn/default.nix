@@ -1,18 +1,25 @@
 { system, pkgs, lib, ... }:
 let
   reconn = (
-    builtins.getFlake "git+ssh://forgejo@git.jrpotter.com/r/reconn?rev=74cb0be878441c4eafcfd2b2c2c926fe87ea8a30"
+    builtins.getFlake "git+ssh://forgejo@git.jrpotter.com/r/reconn?rev=0657541aa62f9b7a672c239f92eb3b410a3dd1ce"
   ).packages.${system}.app;
 in
 {
   services = {
-    nginx.virtualHosts."www.hideandseek.live" = {
-      forceSSL = true;
-      enableACME = true;
-      serverAliases = [ "hideandseek.live" ];
-      locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:4000";
+    nginx = {
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedProxySettings = true;
+      recommendedTlsSettings = true;
+
+      virtualHosts."www.hideandseek.live" = {
+        forceSSL = true;
+        enableACME = true;
+        serverAliases = [ "hideandseek.live" ];
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:4000";
+          proxyWebsockets = true;
+        };
       };
     };
     postgresql = {
