@@ -72,10 +72,12 @@
         };
 
         phobos = {
+          # We keep this machine around as an example of how a remote NixOS
+          # dev machine can be configured.
           imports = [ ./hive/phobos ];
           deployment = {
-            allowLocalDeployment = true;
-            targetHost = "144.126.218.252";
+            allowLocalDeployment = false;
+            targetHost = null;
           };
         };
 
