@@ -42,9 +42,9 @@ in
       Type = "exec";
       EnvironmentFile = "/run/secrets/BOARDWISE_SECRET_KEY_BASE";
       ExecStartPre = "${boardwise}/bin/migrate";
-      ExecStart = "${boardwise}/bin/boardwise start";
-      ExecStop = "${boardwise}/bin/reconn stop";
-      ExecReload = "${boardwise}/bin/reconn restart";
+      ExecStart = "${boardwise}/bin/server start";
+      ExecStop = "${boardwise}/bin/server stop";
+      ExecReload = "${boardwise}/bin/server restart";
       Restart = "on-failure";
     };
   };

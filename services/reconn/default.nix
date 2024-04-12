@@ -1,7 +1,7 @@
 { system, pkgs, lib, ... }:
 let
   reconn = (
-    builtins.getFlake "git+https://git.jrpotter.com/r/reconn?rev=74cb0be878441c4eafcfd2b2c2c926fe87ea8a30"
+    builtins.getFlake "git+ssh://forgejo@git.jrpotter.com/r/reconn?rev=74cb0be878441c4eafcfd2b2c2c926fe87ea8a30"
   ).packages.${system}.app;
 in
 {
@@ -39,9 +39,9 @@ in
       Type = "exec";
       EnvironmentFile = "/run/secrets/RECONN_SECRET_KEY_BASE";
       ExecStartPre = "${reconn}/bin/migrate";
-      ExecStart = "${reconn}/bin/reconn start";
-      ExecStop = "${reconn}/bin/reconn stop";
-      ExecReload = "${reconn}/bin/reconn restart";
+      ExecStart = "${reconn}/bin/server start";
+      ExecStop = "${reconn}/bin/server stop";
+      ExecReload = "${reconn}/bin/server restart";
       Restart = "on-failure";
     };
   };
