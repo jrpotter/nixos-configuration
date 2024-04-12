@@ -49,6 +49,9 @@
             thebe = {
               inherit (tapir) sops-nix;
             };
+            europa = {
+              inherit (tapir) sops-nix;
+            };
           };
         };
 
@@ -81,6 +84,14 @@
           deployment = {
             allowLocalDeployment = false;
             targetHost = "64.23.168.148";
+          };
+        };
+
+        europa = {
+          imports = [ ./hive/europa ];
+          deployment = {
+            allowLocalDeployment = false;
+            targetHost = "147.182.255.90";
           };
         };
       };
