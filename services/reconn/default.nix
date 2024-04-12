@@ -1,7 +1,8 @@
 { system, pkgs, lib, ... }:
 let
-  reconn-url = "git+https://git.jrpotter.com/r/reconn?rev=fa031b2507c625c54abca36fd3f86fc8338e8777";
-  reconn = (builtins.getFlake reconn-url).packages.${system}.app;
+  reconn = (
+    builtins.getFlake "git+https://git.jrpotter.com/r/reconn?rev=fa031b2507c625c54abca36fd3f86fc8338e8777"
+  ).packages.${system}.app;
 in
 {
   services = {

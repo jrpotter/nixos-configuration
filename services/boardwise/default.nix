@@ -1,7 +1,9 @@
 { system, pkgs, lib, ... }:
 let
-  boardwise = builtins.getFlake
-    "github:boardwise-gg/website/0d5a66c604ba8c553d391c7461ff012d8b9c5393";
+  boardwise = (
+    builtins.getFlake "github:boardwise-gg/website/0d5a66c604ba8c553d391c7461ff012d8b9c5393"
+  ).packages.${system}.app;
+
   coach-scraper = builtins.getFlake
     "github:boardwise-gg/coach-scraper/58815d3ae5a69cac12436a01e77019a5ac5d16a7";
 in
@@ -30,15 +32,19 @@ in
   systemd.services.boardwise = {
     enable = true;
     description = "BoardWise Server";
-    after = [ "postgresql.service" ];
-    requires = [ "postgresql.service" ];
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" "postgresql.service" ];
+    requires = [ "network-online.target" "postgresql.service" ];
+    environment = {
+      DATABASE_URL = "ecto://postgres:postgres@localhost/boardwise";
+    };
     serviceConfig = {
-      Environment = [
-        "DATABASE_URL=ecto://postgres:postgres@localhost/boardwise"
-      ];
+      Type = "exec";
       EnvironmentFile = "/run/secrets/BOARDWISE_SECRET_KEY_BASE";
-      ExecStartPre = "${boardwise.packages.${system}.app}/bin/migrate";
-      ExecStart = "${boardwise.packages.${system}.app}/bin/boardwise start";
+      ExecStartPre = "${boardwise}/bin/migrate";
+      ExecStart = "${boardwise}/bin/boardwise start";
+      ExecStop = "${boardwise}/bin/reconn stop";
+      ExecReload = "${boardwise}/bin/reconn restart";
       Restart = "on-failure";
     };
   };
