@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   addons = id: "Anki2/addons21/${toString id}";
 
@@ -9,8 +9,8 @@ let
       domain = "git.foosoft.net";
       owner = "alex";
       repo = "anki-connect";
-      rev = "2996476e03a86ea56fd8148e9a434d6f65af890a";
-      hash = "sha256-5kwOZ6BLZqslBeOcX96GwLv3ME2J3czfw8oHG+ZgIQI=";
+      rev = "4837823bcefe39de7cee03c9dfe576ec01092957";
+      hash = "sha256-MFi0TMBM7K/TNQMS8ghUhQ31Cpqd5LDQ7pY0me4oevI=";
     };
 
     installPhase = ''
