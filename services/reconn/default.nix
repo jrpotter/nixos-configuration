@@ -1,7 +1,7 @@
 { system, pkgs, lib, ... }:
 let
   reconn = (
-    builtins.getFlake "git+ssh://forgejo@git.jrpotter.com/r/reconn?rev=c88162b7b3b81e1051c638bd53ba2d4809febba6"
+    builtins.getFlake "git+ssh://forgejo@git.jrpotter.com/r/reconn?rev=4147b54f0f5da7ec7bc4f54ba888d3a97153ec1a"
   ).packages.${system}.app;
 in
 {
