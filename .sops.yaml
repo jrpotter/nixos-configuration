@@ -1,5 +1,6 @@
 keys:
   - &admin_jrpotter age1huyyxsy4g0e5svmcejxvvdjnnk6qkulgd3qfpue59exnfrnqzudspxnn62
+  - &server_deimos age109zux7z2n5qjzfntvj9u52hr30hkvhecas0hvu9p6ehd9zugxqps4p4g4q
   - &server_thebe age1pjgqvdyzxz30rxvu3zysjpmxrjjsvklggfepswhmwdaunx0kg3vsfept24
   - &server_europa age1z0rfzzfll963msxfschxn7m65pz5p8nuz9p3h940mhhfr6uxe5mqpl4dul
 creation_rules:

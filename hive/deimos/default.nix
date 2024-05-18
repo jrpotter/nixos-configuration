@@ -1,11 +1,11 @@
-{ lib, ... }:
+{ sops-nix, lib, ... }:
 {
   imports = lib.optional (builtins.pathExists ./do-userdata.nix) ./do-userdata.nix ++ [
+    sops-nix.nixosModules.sops
     ../../digital-ocean/configuration.nix
-    ../../services/blog.nix
     ../../services/bookshelf.nix
     ../../services/notebook.nix
-    ../../services/portfolio.nix
+    ../../services/portfolio
   ];
 
   networking = {
