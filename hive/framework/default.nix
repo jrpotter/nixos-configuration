@@ -72,10 +72,12 @@
         chromium
         firefox
         gimp
+        mullvad-vpn
         obsidian
         signal-desktop
         virt-manager
         vlc
+        vscode
         wezterm
         (callPackage ../../users/jrpotter/zotero.nix {})
       ];
@@ -98,6 +100,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "obsidian"
+      "vscode"
     ];
 
   # virt-manager requires dconf to remember settings.

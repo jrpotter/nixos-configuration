@@ -29,7 +29,6 @@ in
       dig
       file
       mosh
-      mullvad-vpn
       unzip
     ];
   };
