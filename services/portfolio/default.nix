@@ -1,7 +1,7 @@
 { system, ... }:
 let
   portfolio = (
-    builtins.getFlake "github:jrpotter/portfolio/0e507765ed4652836af29747d9c384dd91157ec8"
+    builtins.getFlake "github:jrpotter/portfolio/a0b45733bc23da3d98dc1f7f5a69d8e3a0a166b2"
   ).packages.${system}.app;
 in
 {
