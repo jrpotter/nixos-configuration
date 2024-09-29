@@ -28,16 +28,6 @@ let
     '';
   };
 
-  luasnip = {
-    plugin = pkgs.vimPlugins.luasnip;
-    config = ''
-      require("utils.luasnip").setup()
-      require("luasnip").add_snippets("all", require("utils.utf8"), {
-        type = "autosnippets",
-      })
-    '';
-  };
-
   nvim-cmp = {
     plugin = pkgs.vimPlugins.nvim-cmp;
     config = ''
@@ -129,7 +119,6 @@ in
         } else p) [
         colorscheme  # Is always first.
         lualine
-        luasnip
         nvim-cmp
         nvim-dap
         nvim-lspconfig
@@ -137,7 +126,6 @@ in
         nvim-treesitter
         pkgs.vimPlugins.cmp-buffer
         pkgs.vimPlugins.cmp-nvim-lsp
-        pkgs.vimPlugins.cmp_luasnip
         pkgs.vimPlugins.nvim-web-devicons
         pkgs.vimPlugins.vim-prettier
       ];

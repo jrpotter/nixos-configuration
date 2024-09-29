@@ -2,18 +2,11 @@ local M = {}
 
 local cmp = require("cmp")
 local cmp_buffer = require("cmp_buffer")
-local luasnip = require("luasnip")
 local types = require("cmp.types")
 
 function M.setup()
   cmp.setup {
-    snippet = {
-      expand = function(args)
-        require("luasnip").lsp_expand(args.body)
-      end,
-    },
     sources = {
-      { name = "luasnip", option = { show_autosnippets = true } },
       { name = "nvim_lsp" },
       {
         name = "buffer",
@@ -70,8 +63,6 @@ function M.setup()
       ["<c-n>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif luasnip.expand_or_locally_jumpable() then
-          luasnip.expand_or_jump()
         else
           fallback()
         end
@@ -80,8 +71,6 @@ function M.setup()
       ["<c-p>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif luasnip.locally_jumpable(-1) then
-          luasnip.jump(-1)
         else
           fallback()
         end

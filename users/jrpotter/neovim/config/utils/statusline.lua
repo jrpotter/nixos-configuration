@@ -24,12 +24,4 @@ function M.get_dap_status()
   end
 end
 
-function M.get_autoexpand_status()
-  if require('luasnip').expand_auto_on then
-    return "🟢 auto"
-  else
-    return "🔴 auto"
-  end
-end
-
 return M
